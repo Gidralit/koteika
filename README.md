@@ -48,13 +48,13 @@ docker-compose up -d
 
 После входа нужно будет добавить сервер с базами данных. Для этого нажмите на кнопку Add New Server.
 
-Во вкладке General укажите name: postgres
+Во вкладке General укажите name: postgres <br>
 Затем во вкладке Connection:
 
-Host name/addres: db
-Port: 5432
-Maintance database: testDB
-Username: postgres
+Host name/addres: db<br>
+Port: 5432<br>
+Maintance database: testDB<br>
+Username: postgres<br>
 Password: root
 
 После данных махинация можно нажимать кнопку save
