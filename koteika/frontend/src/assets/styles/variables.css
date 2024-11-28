@@ -1,0 +1,16 @@
+:root{
+    --main-color: #1A1A1A;
+    --main-green: #6A9687;
+    --main-accent: #FFA672;
+    --shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.font-regular{
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+}
+
+.font-bold{
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 700;
+}
