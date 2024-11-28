@@ -55,8 +55,7 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "composer install --prefer-dist --no-progress --optimize-autoloader && php artisan serve --host=0.0.0.0 --port=8000"
-  
+      sh -c "[ ! -f .env ] && cp .env.example .env && composer install --prefer-dist --no-progress --optimize-autoloader && php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8000"  
 
   db:
     image: postgres:latest
