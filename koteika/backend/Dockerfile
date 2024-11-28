@@ -18,10 +18,10 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN cp .env.example .env && php artisan key:generate
-
 # Установка зависимостей с помощью Composer
 RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
+
+RUN cp .env.example .env && php artisan key:generate
 
 # Установка прав на папки
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
