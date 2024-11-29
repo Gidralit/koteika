@@ -6,10 +6,9 @@ WORKDIR /app
 
 # Копируем package.json и package-lock.json
 COPY package*.json ./
+COPY . .
 
 # Устанавливаем зависимостиdoc
 RUN npm install
-# Копируем остальные файлы проекта
-COPY . .
 
 CMD ["npm","run", "dev"]
