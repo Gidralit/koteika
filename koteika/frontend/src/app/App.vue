@@ -6,7 +6,7 @@ const route = useRoute();
 </script>
 
 <template>
-  <app-header v-if="route.name !== 'home'" />
+  <app-header />
   <RouterView />
 </template>
 
