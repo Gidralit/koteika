@@ -55,8 +55,14 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "[ ! -f .env ] && cp .env.example .env && composer install --prefer-dist --no-progress --optimize-autoloader && php artisan key:generate && php artisan serve --host=0.0.0.0 --port=8000"  
-
+      sh -c "echo 'Starting the build...'; 
+      [ ! -f .env ] && echo 'Copying .env.example to .env' && cp .env.example .env; 
+      echo 'Installing dependencies...'; 
+      composer install --prefer-dist --no-progress --optimize-autoloader; 
+      echo 'Generating application key...'; 
+      php artisan key:generate; 
+      echo 'Starting server...'; 
+      php artisan serve --host=0.0.0.0 --port=8000"
   db:
     image: postgres:latest
     container_name: db
