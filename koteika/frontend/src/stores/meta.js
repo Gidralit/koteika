@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { HeaderApi } from "@/api";
+import { HeaderApi } from "@/api"
 
 export const useMetaStore = defineStore('meta', () => {
     const headerData = ref({
