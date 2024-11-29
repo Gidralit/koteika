@@ -21,6 +21,12 @@ COPY . .
 # Установка зависимостей с помощью Composer
 RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
+# Выполнение миграций и заполнение тестовыми данными
+RUN php artisan migrate --force && php artisan db:seed --force
+
+# Установка прав на папки
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+
 # Установка прав на папки
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
