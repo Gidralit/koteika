@@ -7,7 +7,7 @@
 Убедитесь что в терминале вы находитесь в корне проекта kotiki
 
 ```bash
-Ваша_директория/kotiki/koteika/koteika
+Ваша_директория/koteika/koteika
 ```
 
 Перейдите в папку frontend
