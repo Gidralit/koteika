@@ -11,8 +11,8 @@
       <a href="#" class="navigation-link">Контакты</a>
     </div>
     <div class="register">
-      <a href="#">Регистрация</a>
-      <a href="#">Авторизация</a>
+      <a href="#" class="navigation-link">Регистрация</a>
+      <a href="#" class="navigation-link">Авторизация</a>
     </div>
 
   </nav>
@@ -21,7 +21,7 @@
 <style scoped lang="scss">
 .navigation{
   display: flex;
-  gap: 208px;
+  gap: 13vw;
   &-inner{
     display: flex;
     gap: 50px;

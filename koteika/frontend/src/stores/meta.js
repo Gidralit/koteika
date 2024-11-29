@@ -1,16 +1,20 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { getHeaders } from "@/api";
+import { HeaderApi } from "@/api";
 
 export const useMetaStore = defineStore('meta', () => {
-    const headerSave = ref({
-
+    const headerData = ref({
+        title: "Котейки",
+        text: "Пушистые мечты",
+        city: "Москва"
     })
+
     const getHeader = () => {
-        getHeaders().then((data) => headerSave.value = data.data)
+        HeaderApi.getHeaders().then((data) => headerData.value = data.data)
     }
+
     return {
-        headerSave,
+        headerData,
         getHeader
     }
 })
