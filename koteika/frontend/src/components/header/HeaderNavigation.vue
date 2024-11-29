@@ -8,7 +8,7 @@
       <a href="#" class="navigation-link">Главная</a>
       <a href="#" class="navigation-link">Номера</a>
       <a href="#" class="navigation-link">Отзывы</a>
-      <a href="#" class="navigation-link">Контакты</a>
+      <a href="#" class="navigation-link">О нас</a>
     </div>
     <div class="register">
       <a href="#" class="navigation-link">Регистрация</a>
