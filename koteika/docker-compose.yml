@@ -59,7 +59,7 @@ services:
       - db
     command: >
       sh -c "echo 'Starting the build...'; 
-      echo 'Генерация ключа приложения'... 
+      echo 'Генерация ключа приложения'...;
       php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
