@@ -13,6 +13,7 @@ services:
       - db
       - frontend
       - backend
+      - pgadmin
 
   frontend:
     build:
@@ -20,8 +21,6 @@ services:
       dockerfile: Dockerfile
     container_name: frontend
     volumes:
-      - ./frontend/src:/app/src
-      - ./frontend/public:/app/public
       - ./frontend:/app
     ports:
       - "5173:5173"
@@ -30,6 +29,10 @@ services:
     environment:
       - NODE_ENV=development
       - VITE_API_URL=http://localhost/api
+    depends_on:
+      - backend
+    command: >
+      sh -c "npm install && npm run dev"
 
   backend:
     build:
@@ -43,26 +46,28 @@ services:
     volumes:
       - ./backend:/var/www
     environment:
-      - APP_ENV=local
-      - APP_DEBUG=true
-      - DB_CONNECTION=pgsql
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_DATABASE=testDB
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=root
-      - DATABASE_URL=postgres://postgres:root@db:5432/testDB
+      APP_ENV: "local"
+      APP_DEBUG: "true"
+      DB_CONNECTION: "pgsql"
+      DB_HOST: "db"
+      DB_PORT: "5432"
+      DB_DATABASE: "testDB"
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "root"
+      DATABASE_URL: "postgres://postgres:root@db:5432/testDB"
     depends_on:
       - db
     command: >
       sh -c "echo 'Starting the build...'; 
-      [ ! -f .env ] && echo 'Copying .env.example to .env' && cp .env.example .env; 
-      echo 'Installing dependencies...'; 
-      composer install --prefer-dist --no-progress --optimize-autoloader; 
-      echo 'Generating application key...'; 
+      echo 'Генерация ключа приложения'... 
       php artisan key:generate; 
-      echo 'Starting server...'; 
-      php artisan serve --host=0.0.0.0 --port=8000"
+      echo 'Запуск миграций...';
+      php artisan migrate --force;
+      echo 'Заполнение тестовыми данными...';
+      php artisan db:seed --force;
+      echo 'Запуск сервера...'; 
+      php artisan serve --host=0.0.0.0 --port=8000";
+
   db:
     image: postgres:latest
     container_name: db
