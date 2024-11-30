@@ -8,8 +8,5 @@ WORKDIR /app
 COPY package-lock.json .
 COPY package.json .
 
-# Устанавливаем зависимостиdoc
-RUN npm install
-
 COPY . .
 
