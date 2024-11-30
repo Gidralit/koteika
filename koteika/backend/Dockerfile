@@ -26,6 +26,3 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 # Открываем порт 8000
 EXPOSE 8000
-
-# Запускаем Laravel-сервер
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
