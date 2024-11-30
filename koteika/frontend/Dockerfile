@@ -5,14 +5,8 @@ FROM node:latest
 WORKDIR /app
 
 # Копируем package.json и package-lock.json
-COPY package*.json ./
-
-ARG INSTALL_DEPENDENCIES=true
-RUN if [ "$INSTALL_DEPENDENCIES" = "true" ]; then npm install; fi
-
-# Устанавливаем зависимостиdoc
-RUN npm install
+COPY package-lock.json .
+COPY package.json .
 
 COPY . .
 
-CMD ["npm","run", "dev"]
