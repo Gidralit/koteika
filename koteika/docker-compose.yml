@@ -59,7 +59,9 @@ services:
       - db
     command: >
       sh -c "echo 'Starting the build...'; 
-      echo 'Генерация ключа приложения'... 
+      echp 'Установка зависимостей';
+      composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader;
+      echo 'Генерация ключа приложения'... ;
       php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
