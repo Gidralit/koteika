@@ -64,8 +64,6 @@ services:
       echo 'Настройка апи...';
       php artisan install:api;
       echo 'Генерация ключа приложения'... ;
-      sh -c "echo 'Starting the build...'; 
-      echo 'Генерация ключа приложения'...;
       php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
