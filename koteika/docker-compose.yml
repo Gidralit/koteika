@@ -58,17 +58,14 @@ services:
     depends_on:
       - db
     command: >
-<<<<<<< HEAD
       sh -c "echo 'Starting the build...';
       echo 'Установка санктума...';
       composer require laravel/sanctum;
       echo 'Настройка апи...';
       php artisan install:api;
       echo 'Генерация ключа приложения'... ;
-=======
       sh -c "echo 'Starting the build...'; 
       echo 'Генерация ключа приложения'...;
->>>>>>> 6ed16d520210840d53992aca61ce311bd3af3c87
       php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
