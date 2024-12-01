@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->integer('number');
-            $table->boolean('its_zanyato')->default(0);
+            $table->string('name');
+            $table->decimal('width', 8, 2);
+            $table->decimal('height', 8, 2);
+            $table->decimal('length', 8, 2);
+            $table->string('equipment');
+            $table->string('photo_path');
             $table->timestamps();
         });
     }
