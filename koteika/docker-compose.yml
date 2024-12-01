@@ -58,15 +58,17 @@ services:
     depends_on:
       - db
     command: >
-      sh -c "echo 'Starting the build...'; 
-      echp 'Установка зависимостей';
-      composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader;
+      sh -c "echo 'Starting the build...';
+      echo 'Установка санктума...';
+      composer require laravel/sanctum;
+      echo 'Настройка апи...';
+      php artisan install:api;
       echo 'Генерация ключа приложения'... ;
+      sh -c "echo 'Starting the build...'; 
+      echo 'Генерация ключа приложения'...;
       php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
-      echo 'Заполнение тестовыми данными...';
-      php artisan db:seed --force;
       echo 'Запуск сервера...'; 
       php artisan serve --host=0.0.0.0 --port=8000";
 
