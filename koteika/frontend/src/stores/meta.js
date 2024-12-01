@@ -10,7 +10,7 @@ export const useMetaStore = defineStore('meta', () => {
     })
 
     const getHeader = () => {
-        HeaderApi.getHeaders().then((data) => headerData.value = data.data)
+        HeaderApi.getHeaders().then((data) => headerData.value = data.data[0])
     }
 
     return {

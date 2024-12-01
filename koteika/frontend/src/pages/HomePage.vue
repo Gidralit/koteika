@@ -2,7 +2,8 @@
 import {useMetaStore} from "@/stores/meta.js";
 import {storeToRefs} from "pinia";
 import {LandingBanner} from "@/components/index.js";
-import {RoomList} from "@/components/room/index.js";
+import { RoomList } from "@/components/index.js";
+import {AboutUs} from "@/components/index.js";
 
 </script>
 
@@ -10,6 +11,7 @@ import {RoomList} from "@/components/room/index.js";
 <main>
   <landing-banner />
   <room-list />
+  <about-us />
 </main>
 </template>
 

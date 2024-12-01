@@ -22,6 +22,7 @@
   background: url("@/assets/img/landing-banner-image.png") no-repeat center;
   background-size: cover;
   display: flex;
+  margin-bottom: 80px;
 
   & > .container{
     display: flex;
