@@ -1,12 +1,13 @@
 <script setup>
 
+import {RoomCard} from "@/components/index.js";
 </script>
 
 <template>
 <section class="room-list">
   <div class="container">
     <h2 class="room-list-title font-bold">Популярные номера</h2>
-    <p>тут будут карточки от леши(мы все очень ждем)? Леша надеюсь сделает</p>
+    <RoomCard />
   </div>
 </section>
 </template>
@@ -16,6 +17,7 @@
   margin-bottom: 80px;
   &-title{
     font-size: 36px;
+    margin-bottom: 40px;
   }
 }
 </style>
