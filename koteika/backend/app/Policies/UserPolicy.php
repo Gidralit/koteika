@@ -13,8 +13,4 @@ class UserPolicy
     {
         //
     }
-
-    public function logout(User $user){
-        return $user->tokens()->count() > 0;
-    }
 }

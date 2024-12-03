@@ -56,18 +56,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Unauthorized'], 401);
     }
-
-    public function logout(){
-        \Log::info('Logout attempt:', ['user' => auth()->user()]);
-        $user = auth()->user();
-
-        if(!$user){
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
-        $this->authorize('logout', $user);
-        
-        $user->tokens()->delete();
-        return response()->json(['message' => 'Logout out successfully', 200]);
-    }
 }
