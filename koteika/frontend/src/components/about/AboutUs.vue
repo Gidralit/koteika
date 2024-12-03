@@ -30,11 +30,11 @@ const { contactsData } = storeToRefs(useMetaStore())
               Свяжитесь с нами, чтобы узнать больше о наших услугах
               или забронировать номер для вашего питомца.
             </p>
-            <p class="about-us__contacts-address">Адрес: {{ contactsData.address }}</p>
-            <p class="about-us__contacts-phone">Телефон: {{ contactsData.phone }}</p>
-            <p class="about-us__contacts-email">Электронная почта: {{ contactsData.email }}</p>
-            <p class="about-us__work-time">Часы работы:</p>
-            <p class="opening-hours">Пн - Вс: {{ contactsData.worksWith }} - {{ contactsData.worksUntil }}</p>
+            <p class="about-us__contacts-address font-bold">Адрес: {{ contactsData.address }}</p>
+            <p class="about-us__contacts-phone font-bold">Телефон: {{ contactsData.telephone }}</p>
+            <p class="about-us__contacts-email font-bold">Электронная почта: {{ contactsData.email }}</p>
+            <p class="about-us__work-time font-bold">Часы работы:</p>
+            <p class="opening-hours">Пн - Вс: {{ contactsData["works with"] }} - {{ contactsData["works until"] }}</p>
             <div class="social">
               <a :href="contactsData.link_to_vk"><VKIcon /></a>
               <a :href="contactsData.link_to_telegram"><TGIcon /></a>
@@ -90,7 +90,7 @@ const { contactsData } = storeToRefs(useMetaStore())
     &-description{
       font-size: 20px;
     }
-    &-phone, &-email{
+    &-phone, &-email, &-address{
       font-size: 24px;
     }
   }
