@@ -13,8 +13,13 @@ class AppServiceProvider extends ServiceProvider
 
     protected $namespace = 'App\Http\Controllers';
 
+    protected $policies = [
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+    ];
+
     public function boot(): void
     {
+        
         $this->mapApiRoutes();
     }
 
