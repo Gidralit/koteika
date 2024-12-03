@@ -6,10 +6,12 @@ use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ReviewController;
 
 Route::get('/headers', [HeaderController::class, 'index']);
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/reviews/random', [ReviewController::class, 'randomCountReviews']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
