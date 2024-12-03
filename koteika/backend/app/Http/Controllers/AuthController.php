@@ -51,7 +51,15 @@ class AuthController extends Controller
             $user = auth()->user();
             $token = $user->createToken('kotiki')->plainTextToken;
 
-            return response()->json(['token' => $token], 200);
+            return response()->json(
+                [
+                    'token' => $token, 
+                    'email' =>$user->email, 
+                    'name' => $user->name
+                ], 
+                    200, 
+                    ['Content-Type' => 'application/json; charset=utf-8'], 
+                    JSON_UNESCAPED_UNICODE);
         }
 
         return response()->json(['message' => 'Unauthorized'], 401);
