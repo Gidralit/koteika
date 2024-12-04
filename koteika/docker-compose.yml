@@ -59,12 +59,6 @@ services:
       - db
     command: >
       sh -c "echo 'Starting the build...';
-      echo 'Установка санктума...';
-      composer require laravel/sanctum;
-      echo 'Настройка апи...';
-      php artisan install:api;
-      echo 'Генерация ключа приложения'... ;
-      php artisan key:generate; 
       echo 'Запуск миграций...';
       php artisan migrate --force;
       echo 'Запуск сервера...'; 
