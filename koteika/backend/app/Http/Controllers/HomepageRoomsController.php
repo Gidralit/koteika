@@ -14,12 +14,18 @@ class HomepageRoomsController extends Controller
      */
     public function editStatusRoom(Request $request, $id): JsonResponse
     {
+        if(!auth()->check()){
+            return response()->json(['message'=>'unauthenticated'], 401);
+        }
+
         $room = Room::find($id);
         if(!$room){
             return response()->json(['message'=>'room not found'], 404);
         }
         
-        $this->authorize('update', $room);
+        if(Gate::denies('update', $room)){
+            return response()->json(["message" => "forbidden"], 403);
+        }
 
         if($request->has('status')){
             $room->status = $request->status;
