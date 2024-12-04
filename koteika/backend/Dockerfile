@@ -3,6 +3,7 @@ FROM php:8.3-fpm
 
 # Установка необходимых пакетов и расширений
 RUN apt-get update && apt-get install -y \
+    libcurl4-openssl-dev \
     libpq-dev \
     libzip-dev \
     unzip \
@@ -25,10 +26,6 @@ RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloa
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 RUN composer require laravel/sanctum
-
-RUN php artisan migrate --force
-
-RUN php artisan install:api
 
 # Открываем порт 8000
 EXPOSE 8000
