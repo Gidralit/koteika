@@ -26,6 +26,8 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 RUN composer require laravel/sanctum
 
+RUN php artisan migrate --force
+
 RUN php artisan install:api
 
 # Открываем порт 8000

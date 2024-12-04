@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
 
-class HeaderController extends Controller
+class HomepageRoomsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, $id): JsonResponse
+    public function editStatusRoom(Request $request, $id): JsonResponse
     {
         $room = Room::find($id);
         if(!$room){
