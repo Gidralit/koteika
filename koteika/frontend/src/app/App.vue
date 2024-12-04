@@ -27,6 +27,10 @@ onMounted(async () => {
   </template>
 </template>
 
-<style scoped lang="scss">
-
+<style lang="scss">
+#app{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
 </style>

@@ -5,13 +5,13 @@
 <template>
   <nav class="navigation">
     <div class="navigation-inner">
-      <a href="#" class="navigation-link">Главная</a>
+      <router-link to="/" class="navigation-link">Главная</router-link>
       <a href="#" class="navigation-link">Номера</a>
       <a href="#" class="navigation-link">Отзывы</a>
       <a href="#" class="navigation-link">О нас</a>
     </div>
     <div class="register">
-      <a href="#" class="navigation-link">Регистрация</a>
+      <router-link to="/register" class="navigation-link">Регистрация</router-link>
       <a href="#" class="navigation-link">Авторизация</a>
     </div>
 
