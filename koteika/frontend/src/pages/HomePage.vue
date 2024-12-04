@@ -1,9 +1,9 @@
 <script setup>
 import {useMetaStore} from "@/stores/meta.js";
 import {storeToRefs} from "pinia";
-import {LandingBanner} from "@/components/index.js";
+import { LandingBanner } from "@/components/index.js";
 import { RoomList } from "@/components/index.js";
-import {AboutUs} from "@/components/index.js";
+import { AboutUs } from "@/components/index.js";
 
 </script>
 
