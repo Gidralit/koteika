@@ -4,20 +4,19 @@ import {RoomCard} from "@/components/index.js";
 </script>
 
 <template>
+
 <section class="room-list">
-  <div class="container">
-    <h2 class="room-list-title font-bold">Популярные номера</h2>
-    <RoomCard />
-  </div>
+  <RoomCard
+      v-for="room in 4"
+      :key="room"
+  />
 </section>
 </template>
 
 <style scoped lang="scss">
 .room-list{
-  margin-bottom: 80px;
-  &-title{
-    font-size: 36px;
-    margin-bottom: 40px;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
 }
 </style>

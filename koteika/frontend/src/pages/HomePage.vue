@@ -10,11 +10,22 @@ import { AboutUs } from "@/components/index.js";
 <template>
 <main>
   <landing-banner />
-  <room-list />
+  <section class="rooms">
+    <div class="container">
+      <h2 class="rooms-title font-bold">Популярные номера</h2>
+      <room-list />
+    </div>
+  </section>
   <about-us />
 </main>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.rooms{
+  margin-bottom: 80px;
+  &-title{
+    font-size: 36px;
+    margin-bottom: 40px;
+  }
+}
 </style>
