@@ -19,9 +19,6 @@ WORKDIR /var/www
 
 COPY . .
 
-# Установка зависимостей с помощью Composer
-RUN composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
-
 # Установка прав на папки
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 

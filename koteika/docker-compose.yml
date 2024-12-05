@@ -59,6 +59,8 @@ services:
       - db
     command: >
       sh -c "echo 'Starting the build...';
+      echo 'Установка зависимостей...';
+      composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader;
       echo 'Установка миграций...';
       RUN php artisan migrate --force;
       echo 'Запуск сервера...'; 
