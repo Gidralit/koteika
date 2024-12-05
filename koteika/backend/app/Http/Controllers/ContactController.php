@@ -9,10 +9,6 @@ use Illuminate\Http\JsonResponse;
 class ContactController extends Controller
 {
     public function index(): JsonResponse{
-        $contacts = Contact::all();
-        return response() -> json($contacts, 
-        200, 
-        ['Content-Type' => 'application/json; charset=utf-8'], 
-        JSON_UNESCAPED_UNICODE);
+        return response() -> json(Contact::all());
     }
 }

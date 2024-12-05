@@ -62,7 +62,7 @@ services:
       echo 'Установка зависимостей...';
       composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader;
       echo 'Установка миграций...';
-      php artisan migrate --force;
+      php artisan migrate:fresh --force;
       echo 'Установка тестовых данных';
       php artisan db:seed;
       echo 'Запуск сервера...'; 
