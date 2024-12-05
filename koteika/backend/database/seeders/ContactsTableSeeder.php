@@ -15,8 +15,8 @@ class ContactsTableSeeder extends Seeder
     {
         Contact::create([
             'address' => 'ул. Пушкина д. Колотушкина',
-            'works with' => '8:00',
-            'works until' => '20:00',
+            'works_with' => '8:00',
+            'works_until' => '20:00',
             'telephone' => '+7 (999) 999 99-99',
             'email' => 'oteldlyazhivotnix@email.com',
             'link_to_vk' => 'https://vk.com/otelfrompets',
