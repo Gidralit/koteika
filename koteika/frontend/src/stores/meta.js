@@ -11,8 +11,8 @@ export const useMetaStore = defineStore('meta', () => {
 
     const contactsData = ref({
         address: "Москва, Большая садовая, 228",
-        "works with": "9:00",
-        "works until": "19:00",
+        works_with: "9:00",
+        works_until: "19:00",
         telephone: "+7(123)456-78-90",
         email: "info@pushistyuyut.ru",
         link_to_vk: "https://vk.com/",
