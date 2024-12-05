@@ -20,7 +20,7 @@ class ContactsTableSeeder extends Seeder
             'telephone' => '+7 (999) 999 99-99',
             'email' => 'oteldlyazhivotnix@email.com',
             'link_to_vk' => 'https://vk.com/otelfrompets',
-            'link_to_instagram' => 'https://instagram.com/otelfrompets',
+            'link_to_whatsapp' => 'https://whatsapp.com/otelfrompets',
             'link_to_telegram' => 'https://web.telegram.com/otelfrompets',
         ]);
     }
