@@ -18,7 +18,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <template v-if="!isLoading">
+  <template v-if="isLoading">
     <AppHeader />
     <RouterView />
   </template>

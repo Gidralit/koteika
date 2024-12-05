@@ -1,5 +1,4 @@
 <script setup>
-
 import {LawIcon} from "@/components/icons/index.js";
 </script>
 
