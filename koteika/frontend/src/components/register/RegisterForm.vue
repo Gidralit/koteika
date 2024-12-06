@@ -1,4 +1,7 @@
 <script setup>
+import { useForm } from "vee-validate";
+import * as yup from 'yup'
+
 
 
 </script>
