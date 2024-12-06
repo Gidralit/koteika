@@ -2,20 +2,35 @@
 import {AppHeader} from "@/components/index.js";
 import {useRoute} from "vue-router";
 import {useMetaStore} from "@/stores/meta.js";
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 
 const route = useRoute();
-const { getHeader } = useMetaStore()
+const { getHeader, getContacts } = useMetaStore()
 
-onMounted(() => getHeader())
+const isLoading = ref(true)
+
+
+onMounted(async () => {
+  await Promise.all([getHeader(), getContacts()])
+  isLoading.value = false
+})
 
 </script>
 
 <template>
-  <app-header />
-  <RouterView />
+  <template v-if="!isLoading">
+    <AppHeader />
+    <RouterView />
+  </template>
+  <template v-else>
+    <h1>Загрузка страницы</h1>
+  </template>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+#app{
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
 </style>

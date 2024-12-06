@@ -14,9 +14,9 @@ class HeadersTableSeeder extends Seeder
     public function run(): void
     {
         Header::create([
-            'title' => 'Тестовое название',
-            'text' => 'Тестовый слоган',
-            'city' => 'Тестовый город',
+            'title' => 'Котейка',
+            'text' => 'Пушистые мечты',
+            'city' => 'Москва',
         ]);
     }
 }

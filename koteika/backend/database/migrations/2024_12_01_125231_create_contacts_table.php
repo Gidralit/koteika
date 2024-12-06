@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('telephone');
             $table->string('email');
             $table->string('link_to_vk');
-            $table->string('link_to_instagram');
+            $table->string('link_to_whatsapp');
             $table->string('link_to_telegram');
             $table->timestamps();
         });

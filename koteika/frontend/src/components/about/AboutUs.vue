@@ -1,5 +1,9 @@
 <script setup>
+import {useMetaStore} from "@/stores/meta.js";
+import {storeToRefs} from "pinia";
+import { TGIcon, VKIcon, WAIcon } from "@/components/icons";
 
+const { contactsData } = storeToRefs(useMetaStore())
 </script>
 
 <template>
@@ -21,17 +25,20 @@
           </div>
           <div class="about-us__contacts">
             <h3 class="about-us__contacts-title font-bold">Контакты</h3>
-            <p class="about-us__contacts-decsription">
+            <p class="about-us__contacts-description">
               Мы всегда рады помочь вам и ответить на любые вопросы!
               Свяжитесь с нами, чтобы узнать больше о наших услугах
               или забронировать номер для вашего питомца.
             </p>
-            <p class="about-us__contacts-phone">Телефон: +7 (123) 456-78-90</p>
-            <p class="about-us__contacts-email">Электронная почта: info@pushistyuyut.ru</p>
-            <p class="about-us__work-time">Часы работы:</p>
-            <div class="opening-hours">
-              <p>Пн - Пт: 9:00 - 19:00</p>
-              <p>Сб - Вс: 10:00 - 17:00</p>
+            <p class="about-us__contacts-address font-bold">Адрес: {{ contactsData.address }}</p>
+            <p class="about-us__contacts-phone font-bold">Телефон: {{ contactsData.telephone }}</p>
+            <p class="about-us__contacts-email font-bold">Электронная почта: {{ contactsData.email }}</p>
+            <p class="about-us__work-time font-bold">Часы работы:</p>
+            <p class="opening-hours">Пн - Вс: {{ contactsData.works_with }} - {{ contactsData.works_until }}</p>
+            <div class="social">
+              <a :href="contactsData.link_to_vk"><VKIcon /></a>
+              <a :href="contactsData.link_to_telegram"><TGIcon /></a>
+              <a :href="contactsData.link_to_instagram"><WAIcon /></a>
             </div>
           </div>
         </div>
@@ -80,7 +87,10 @@
     &-title{
       font-size: 32px;
     }
-    &-phone, &-email{
+    &-description{
+      font-size: 20px;
+    }
+    &-phone, &-email, &-address{
       font-size: 24px;
     }
   }
@@ -94,6 +104,10 @@
     & > p{
       font-size: 20px;
     }
+  }
+  .social{
+    display: flex;
+    gap: 20px;
   }
 }
 </style>
