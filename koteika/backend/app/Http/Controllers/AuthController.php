@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Services\UserService;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -15,32 +17,16 @@ class AuthController extends Controller
 
     use AuthorizesRequests;
 
-    public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|regex:/^[а-яА-ЯёЁa-zA-Z., -]+$/u',
-            'phone' => 'required|regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'avatar' => 'nullable|image|mimes:jpeg,png|max:2048', 
-        ]);
+    protected $userService;
 
-        if($validator->fails()){
-            return response()->json($validator->errors(), 422);
-        }
+    public function __construct(UserService $userService){
+        $this->userService = $userService;
+    }
 
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->password = Hash::make($request->password);
+    public function register(RegisterRequest $request){
 
-        if($request->hasFile('avatar')){
-            $filename = Str::random(10).'.'.$request->avatar->extension();
-            $request->avatar->storeAs('avatars', $filename, 'public');
-            $user->avatar = 'storage/avatars/'.$filename;
-        }
+        $user = $this->userService->createUser($request->validated());
 
-        $user->save();
         return response()->json(['user' => $user], 201);
     }
 
