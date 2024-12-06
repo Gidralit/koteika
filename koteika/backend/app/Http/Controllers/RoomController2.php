@@ -4,58 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Services\RoomService;
 
 class RoomController2 extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    protected $roomService;
+
+    public function __construct(RoomService $roomService){
+        $this->roomService = $roomService;
+    }
+
     public function index(Request $request) //Получение номеров с фильтрацией
     {
-        $query = Room::query();
+        $query = Room::with('equipment');
 
-        // Сортировка по стоимости(ОТ цена ДО цена)
-        if(!is_null($request->input('min_price')) || !is_null($request->input('max_price'))){
-            $minPrice = $request->input('min_price');
-            $maxPrice = $request->input('max_price');
+        $rooms = $this->roomService->applyFiltersAndSort($query, $request)->get();
 
-            if(!is_null($minPrice)){
-                $query->where('price', '>=', $minPrice);
-            }
-
-            if(!is_null($maxPrice)){
-                $query->where('price', '<=', $maxPrice);
-            }
-        }
-
-        //Фильтр на размер площадей
-        if(!is_null($request->input('dimensions'))){
-            $dimensions = $request->input('dimensions');
-            $arrayNumbers = explode(',', $dimensions);
-            $arrayDimensions = [];
-
-            for($i = 0; $i<count($arrayNumbers); $i += 3){
-                $arrayDimensions[] = trim($arrayNumbers[$i]).','.trim($arrayNumbers[$i+1]).','.trim($arrayNumbers[$i+2]);
-            }
-
-            if (!empty($arrayDimensions)) {
-                // Используем orWhere, чтобы охватить любые подходящие размеры
-                $query->where(function ($q) use ($arrayDimensions) {
-                    foreach ($arrayDimensions as $dimension) {
-                        $q->orWhere('dimensions', '=', $dimension);
-                    }
-                });
-            }
-
-        }
-
-        if($request->input('order_by') == 'desc'){
-            $rooms = $query->orderBy('price', 'desc')->get();
-            return response()->json($rooms);
-        }else{
-            $rooms = $query->orderBy('price', 'asc')->get();
-            return response()->json($rooms);
-        }
+        return response()->json($rooms);
     }
 
     /**
