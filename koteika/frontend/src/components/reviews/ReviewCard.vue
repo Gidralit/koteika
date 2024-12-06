@@ -22,6 +22,7 @@ const props = defineProps({
     default: null
   }
 })
+
 </script>
 
 <template>
@@ -38,10 +39,27 @@ const props = defineProps({
         class="rating-star"
         v-for="star in rating" :key="star"/>
   </div>
-
 </section>
 </template>
 
 <style scoped lang="scss">
+.review{
+  padding: 20px;
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
+  width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
 
+  &-user-info{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  &-user-avatar{
+    width: 50px;
+    border-radius: 100%;
+  }
+}
 </style>
