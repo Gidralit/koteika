@@ -5,7 +5,7 @@ import { AuthApi } from '@/api'
 
 export const useAuthStore = defineStore('auth', () => {
     const authToken = ref(localStorage.getItem('user-token'))
-    const errorStatusReg = ref(null)
+    const errorStatusReg = ref([])
     const errorStatusLog = ref(null)
     const isAuth = computed(() => {
         return authToken.value
@@ -21,7 +21,9 @@ export const useAuthStore = defineStore('auth', () => {
             await AuthApi.registration(name, phone, email, password, password_confirmation, avatar)
         }
         catch (e){
-            errorStatusReg.value = e.message
+            Object.values(e.response.data.errors).forEach(errors => {
+                errorStatusReg.value.push(errors[0])
+            })
         }
     }
 
