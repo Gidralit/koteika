@@ -12,7 +12,7 @@
     </div>
     <div class="register">
       <router-link to="/register" class="navigation-link">Регистрация</router-link>
-      <a href="#" class="navigation-link">Авторизация</a>
+      <router-link to="/login" class="navigation-link">Авторизация</router-link>
     </div>
   </nav>
 </template>

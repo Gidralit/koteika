@@ -6,7 +6,7 @@ import { AuthApi } from '@/api'
 export const useAuthStore = defineStore('auth', () => {
     const authToken = ref(localStorage.getItem('user-token'))
     const errorStatusReg = ref([])
-    const errorStatusLog = ref(null)
+    const errorStatusLog = ref([])
     const isAuth = computed(() => {
         return authToken.value
     })
@@ -28,7 +28,20 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    const login = async (email, password) => {
+        try{
+            await AuthApi.login(email, password)
+            return true
+        }
+        catch (e){
+            Object.values(e.response.data.errors).forEach(errors => {
+                errorStatusLog.value.push(errors[0])
+            })
+        }
+    }
+
     return {
-        register
+        register,
+        login
     }
 })
