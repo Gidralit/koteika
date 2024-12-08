@@ -19,6 +19,7 @@ export const useAuthStore = defineStore('auth', () => {
     const register = async (name, phone, email, password, password_confirmation, avatar) => {
         try{
             await AuthApi.registration(name, phone, email, password, password_confirmation, avatar)
+            return true
         }
         catch (e){
             Object.values(e.response.data.errors).forEach(errors => {

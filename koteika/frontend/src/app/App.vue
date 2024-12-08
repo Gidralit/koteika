@@ -16,7 +16,6 @@ const isLoading = ref(true)
 
 onMounted(async () => {
   await Promise.all([getHeader(), getContacts(), getReviews()])
-  register('оылдавод', '+7(923)444-94-08', 'kjdshf@ksjfdh.com', 'qweasd123', 'qweasd123', '')
   isLoading.value = false
 })
 
