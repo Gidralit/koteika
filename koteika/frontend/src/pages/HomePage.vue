@@ -37,6 +37,7 @@ import { AboutUs } from "@/components/index.js";
 .reviews{
   &-title{
     font-size: 36px;
+    margin-bottom: 40px;
   }
 }
 </style>
