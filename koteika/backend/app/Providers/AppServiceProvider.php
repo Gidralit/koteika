@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use App\Models\Contact;
+use App\Models\Equipment;
+use App\Models\Header;
+use App\Models\Room;
+use App\Models\User;
+use App\Policies\ContactPolicy;
+use App\Policies\EquipmentPolicy;
+use App\Policies\HeaderPolicy;
+use App\Policies\RoomPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -14,13 +24,16 @@ class AppServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     protected $policies = [
-        \App\Models\User::class => \App\Policies\UserPolicy::class,
-        \App\Models\Room::class => \App\Policies\RoomPolicy::class,
+        User::class => UserPolicy::class,
+        Room::class => RoomPolicy::class,
+        Header::class => HeaderPolicy::class,
+        Contact::class => ContactPolicy::class,
+        Equipment::class => EquipmentPolicy::class
     ];
 
     public function boot(): void
     {
-        
+
         $this->mapApiRoutes();
     }
 

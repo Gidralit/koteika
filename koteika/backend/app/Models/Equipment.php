@@ -11,6 +11,8 @@ class Equipment extends Model
 
     protected $fillable = ['name'];
 
+    protected $hidden = ['created_at','updated_at'];
+
     public function room(){
         return $this->belongsToMany(Room::class, 'equipment_room');
     }

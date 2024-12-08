@@ -1,20 +1,15 @@
 <?php
 
 namespace App\Policies;
-
 use App\Models\User;
 
-class RoomPolicy
+class ContactPolicy
 {
-    public function create(User $user)
-    {
-        return $user->role === 'admin';
-    }
     public function edit(User $user)
     {
         return $user->role === 'admin';
     }
-    public function destroy(User $user)
+    public function index(User $user)
     {
         return $user->role === 'admin';
     }

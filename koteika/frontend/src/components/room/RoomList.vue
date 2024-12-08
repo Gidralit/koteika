@@ -9,6 +9,7 @@ import {RoomCard} from "@/components/index.js";
   <RoomCard
       v-for="room in 4"
       :key="room"
+
   />
 </section>
 </template>

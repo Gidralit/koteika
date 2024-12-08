@@ -4,17 +4,22 @@ namespace App\Policies;
 
 use App\Models\User;
 
-class RoomPolicy
+class EquipmentPolicy
 {
-    public function create(User $user)
-    {
-        return $user->role === 'admin';
-    }
     public function edit(User $user)
     {
         return $user->role === 'admin';
     }
+
+    public function index(User $user)
+    {
+        return $user->role === 'admin';
+    }
     public function destroy(User $user)
+    {
+        return $user->role === 'admin';
+    }
+    public function create(User $user)
     {
         return $user->role === 'admin';
     }

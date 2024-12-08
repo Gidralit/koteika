@@ -38,7 +38,7 @@ const { contactsData } = storeToRefs(useMetaStore())
             <div class="social">
               <a :href="contactsData.link_to_vk"><VKIcon /></a>
               <a :href="contactsData.link_to_telegram"><TGIcon /></a>
-              <a :href="contactsData.link_to_instagram"><WAIcon /></a>
+              <a :href="contactsData.link_to_whatsapp"><WAIcon /></a>
             </div>
           </div>
         </div>

@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use App\Services\UserService;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -39,11 +35,11 @@ class AuthController extends Controller
 
             return response()->json(
                 [
-                    'token' => $token, 
+                    'token' => $token,
                     'user' => $user
-                ], 
-                    200, 
-                    ['Content-Type' => 'application/json; charset=utf-8'], 
+                ],
+                    200,
+                    ['Content-Type' => 'application/json; charset=utf-8'],
                     JSON_UNESCAPED_UNICODE);
         }
 

@@ -3,15 +3,17 @@ import {AppHeader} from "@/components/index.js";
 import {useRoute} from "vue-router";
 import {useMetaStore} from "@/stores/meta.js";
 import {onMounted, ref} from "vue";
+import {useReviewStore} from "@/stores/review.js";
 
 const route = useRoute();
 const { getHeader, getContacts } = useMetaStore()
+const { getReviews } = useReviewStore()
 
 const isLoading = ref(true)
 
 
 onMounted(async () => {
-  await Promise.all([getHeader(), getContacts()])
+  await Promise.all([getHeader(), getContacts(), getReviews()])
   isLoading.value = false
 })
 
