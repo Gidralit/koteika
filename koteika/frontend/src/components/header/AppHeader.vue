@@ -1,5 +1,5 @@
 <script setup>
-import HeaderNavigation from "@/components/header/HeaderNavigation.vue";
+import { HeaderNavigation } from "@/components/index.js";
 import {useMetaStore} from "@/stores/meta.js";
 import {storeToRefs} from "pinia";
 
@@ -10,10 +10,10 @@ const { headerData } = storeToRefs(useMetaStore())
 <template>
 <header class="header">
   <div class="header-inner container">
-    <a href="#" class="header-logo">
+    <router-link to="/" class="header-logo">
       <h1 class="logo font-bold">{{ headerData.title }}</h1>
       <p class="logo-slogan">{{ headerData.text }}</p>
-    </a>
+    </router-link>
     <p class="header-city">
       <img src="@/assets/img/location.svg" alt="location">
       {{ headerData.city }}

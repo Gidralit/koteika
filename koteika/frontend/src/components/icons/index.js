@@ -5,4 +5,5 @@ import WAIcon from "./WAIcon.vue";
 import StarIcon from "./StarIcon.vue";
 import ArrowLeftIcon from "./ArrowLeftIcon.vue";
 import ArrowRightIcon from "./ArrowRightIcon.vue";
-export { LawIcon, VKIcon, WAIcon, TGIcon, StarIcon, ArrowLeftIcon, ArrowRightIcon }
+import UpArrowIcon from "./UpArrowIcon.vue";
+export { LawIcon, VKIcon, WAIcon, TGIcon, StarIcon, ArrowLeftIcon, ArrowRightIcon, UpArrowIcon }
