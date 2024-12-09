@@ -71,7 +71,8 @@ const [passwordConfirm, passwordConfirmAttrs] = defineField('passwordConfirm')
 const [avatar, avatarAttrs] = defineField('avatar')
 
 const submit = handleSubmit((values) => {
-  register(values.name, values.telephone, values.email, values.password, values.passwordConfirm, values.avatar).then(() => router.push('/login'))
+  register(values.name, values.telephone, values.email, values.password, values.passwordConfirm, values.avatar)
+      .then((bool) => { if(bool) router.push('/login') })
 })
 
 </script>
