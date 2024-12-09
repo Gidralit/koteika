@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Validators;
+namespace App\Http\Requests;
+
+
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -19,6 +21,7 @@ class ReservationRequest extends FormRequest
             'check_in' => 'required|date|after_or_equal:today',
             'check_out' => 'required|date|after:check_in',
             'guests' => 'required|integer|min:1',
+            'room_id' => 'required|exists:rooms,id',
         ];
     }
 

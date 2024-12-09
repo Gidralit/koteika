@@ -19,8 +19,14 @@ Route::prefix('api-booking')->middleware(['auth:sanctum'])->group(function () {
     Route::post('/equipments', [EquipmentController::class, 'create']);
     Route::patch('/equipments/{equipment}/edit', [EquipmentController::class, 'edit']);
     Route::delete('/equipments/{equipment}/delete', [EquipmentController::class, 'destroy']);
-
+    Route::get('/reservation', [RoomController::class, 'view']);
+    Route::post('/reservation/{room}', [RoomController::class, 'reservationRoom']);
+    Route::delete('/reservation/{product_id}', [RoomController::class, 'cancelReservation']);
 });
+
+Route::prefix('api-reservation')->middleware(['auth:sanctum'])->group(function () {
+});
+
 Route::apiResource('/rooms', RoomController::class);
 //Route::get('/equipments_dependencies', [EquipmentController::class, 'equipmentsDependencies']);
 
