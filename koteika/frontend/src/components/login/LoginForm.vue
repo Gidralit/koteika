@@ -30,7 +30,8 @@ const [email, emailAttrs] = defineField('email')
 const [password, passwordAttrs] = defineField('password')
 
 const submit = handleSubmit((values) => {
-  login(values.email, values.password).then(() => router.push('/'))
+  login(values.email, values.password)
+      .then((bool) => { if(bool) router.push('/') })
 })
 </script>
 
@@ -64,6 +65,7 @@ const submit = handleSubmit((values) => {
           placeholder="Введите пароль"
       >
     </div>
+    <p class="error" v-if="errorStatusLog">Неверный логин или пароль</p>
     <button class="login-btn font-regular">Войти</button>
   </form>
 </template>

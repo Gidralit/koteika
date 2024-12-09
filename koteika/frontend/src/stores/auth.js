@@ -6,16 +6,17 @@ import { AuthApi } from '@/api'
 export const useAuthStore = defineStore('auth', () => {
     const authToken = ref(localStorage.getItem('user-token'))
     const errorStatusReg = ref([])
-    const errorStatusLog = ref([])
+    const errorStatusLog = ref(false)
     const isAuth = computed(() => {
         return authToken.value
     })
 
-    const errorHandler = (errors) => {
+    const errorHandlerReg = (errors) => {
         Object.values(errors).forEach(error => {
             errorStatusReg.value.push(error[0])
-            console.log(errorStatusReg.value)
         })
+        console.log(errorStatusReg.value)
+        console.log(errors)
     }
 
     const setToken = (token) => {
@@ -24,24 +25,25 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const register = async (name, phone, email, password, password_confirmation, avatar) => {
+        errorStatusReg.value = []
         try{
             const response = await AuthApi.registration(name, phone, email, password, password_confirmation, avatar)
             if (response.data.errors){
-                errorHandler(response.data.errors)
+                errorHandlerReg(response.data.errors)
                 return false
             }
             return true
         }
         catch (e){
-            console.log(e)
             if (e){
-                errorHandler(e.errors)
+                errorHandlerReg(e.response.data)
                 return false
             }
         }
     }
 
     const login = async (email, password) => {
+        errorStatusLog.value = false
         try{
             const response = await AuthApi.login(email, password)
             if (response.data.token){
@@ -49,19 +51,20 @@ export const useAuthStore = defineStore('auth', () => {
                 return true
             }
             if (response.data.errors){
-                Object.values(response.data.errors).forEach(errors => {
-                    errorStatusLog.value.push(errors[0])
-                })
+                errorStatusLog.value = true
                 return false
             }
 
         }
         catch (e){
-            console.log(e)
+            if (e){
+                errorStatusLog.value = true
+                return false
+            }
         }
     }
 
-    const logout = async (email, password) => {
+    const logout = () => {
         authToken.value = null
         localStorage.removeItem('user-token')
     }
@@ -70,6 +73,8 @@ export const useAuthStore = defineStore('auth', () => {
         register,
         login,
         logout,
+        errorStatusReg,
+        errorStatusLog,
         isAuth
     }
 })

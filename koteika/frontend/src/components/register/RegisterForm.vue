@@ -164,8 +164,8 @@ const submit = handleSubmit((values) => {
       >
       <p class="errors" v-if="errors.passwordConfirm">{{ errors.passwordConfirm }}</p>
     </div>
-    <button class="register-btn font-regular" :disabled="errors.email || errors.password">Зарегистрироваться</button>
     <p class="errors" v-for="error in errorStatusReg" :key="error">{{ error }}</p>
+    <button class="register-btn font-regular" :disabled="errors.email || errors.password">Зарегистрироваться</button>
   </form>
 </template>
 
