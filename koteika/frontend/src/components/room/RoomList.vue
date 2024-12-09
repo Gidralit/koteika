@@ -1,17 +1,20 @@
 <script setup>
+import { RoomCard } from "@/components/index.js";
+import {storeToRefs} from "pinia";
+import {useRoomStore} from "@/stores/room.js";
+const { rooms } = storeToRefs(useRoomStore())
 
-import {RoomCard} from "@/components/index.js";
 </script>
 
 <template>
 
-<section class="room-list">
+<div class="room-list">
   <RoomCard
-      v-for="room in 4"
+      v-for="room in rooms.splice(0, 4)"
       :key="room"
-
+      v-bind="room"
   />
-</section>
+</div>
 </template>
 
 <style scoped lang="scss">

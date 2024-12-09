@@ -6,8 +6,8 @@ import {RoomList} from "@/components/index.js";
 <template>
   <section class="catalog">
     <div class="container">
-      <h2>Каталог</h2>
-      <aside>
+      <h2 class="catalog-title">Каталог</h2>
+      <aside class="">
 
       </aside>
       <RoomList />
@@ -16,5 +16,10 @@ import {RoomList} from "@/components/index.js";
 </template>
 
 <style scoped lang="scss">
-
+.catalog{
+  &-title{
+    font-size: 36px;
+    padding: 38px 0;
+  }
+}
 </style>
