@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class UserService{
     public function createUser(array $data){
-        if($data['avatar']){
+        if(isset($data['avatar'])){
             $filename = Str::random(10).'.'.$data['avatar']->extension();
             $data['avatar']->storeAs('avatars', $filename,'public');
             $data['avatar'] = 'storage/avatars/'.$filename;
