@@ -21,5 +21,14 @@ class UsersSeeder extends Seeder
             "phone" => "+1(111)111-11-11",
             "role" => "admin",
         ]);
+
+        User::create([
+            "name" => "user",
+            "email" => "user@user.com",
+            "password" => "user",
+            "avatar" => "",
+            "phone" => "+1(111)111-11-12",
+            "role" => "user",
+        ]);
     }
 }

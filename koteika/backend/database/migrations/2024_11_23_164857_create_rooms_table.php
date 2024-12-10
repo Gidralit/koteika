@@ -6,25 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('dimensions');
-            $table->string('photo_path');
-            $table->enum('status', ['show', 'no_show'])->default('no_show');
+            $table->float('width');
+            $table->float('height');
+            $table->float('length');
             $table->integer('price');
+            $table->string('photo_path')->nullable();
+            $table->boolean('show_on_homepage')->default(false);
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('rooms');

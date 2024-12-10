@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -29,7 +30,7 @@ class UserService{
         if(isset($data['avatar'])){
             $filename = Str::random(10).'.'.$data['avatar']->extension();
             $data['avatar']->storeAs('avatars', $filename,'public');
-            $data['avatar'] = 'storage/avatars/'.$filename;
+            $data['avatar'] = 'storage/app/public/avatars/'.$filename;
         }
         if(isset($data['password'])){
             $data['password'] = Hash::make($data['password']);
@@ -37,5 +38,19 @@ class UserService{
 
         $user->save();
         return $user;
+    }
+
+    public function loginUser(array $credentials)
+    {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('kotiki')->plainTextToken;
+
+            return [
+                'token' => $token,
+                'user' => $user,
+            ];
+        }
+        return null;
     }
 }
