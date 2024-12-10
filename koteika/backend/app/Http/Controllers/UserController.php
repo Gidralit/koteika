@@ -23,11 +23,16 @@ class UserController extends Controller
     public function update(EditUserRequest $request)
     {
         $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }
+
         $updatedUser = $this->userService->updateUser($user, $request->validated());
         return response()->json([
             'message'=>'user updated successfully',
             'user' => $updatedUser,
         ], 200);
     }
-    
+
 }
