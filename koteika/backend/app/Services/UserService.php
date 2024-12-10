@@ -38,4 +38,18 @@ class UserService{
         $user->save();
         return $user;
     }
+
+    public function loginUser(array $credentials)
+    {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('kotiki')->plainTextToken;
+
+            return [
+                'token' => $token,
+                'user' => $user,
+            ];
+        }
+        return null;
+    }
 }
