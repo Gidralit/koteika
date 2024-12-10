@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -37,5 +38,19 @@ class UserService{
 
         $user->save();
         return $user;
+    }
+
+    public function loginUser(array $credentials)
+    {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            $token = $user->createToken('kotiki')->plainTextToken;
+
+            return [
+                'token' => $token,
+                'user' => $user,
+            ];
+        }
+        return null;
     }
 }

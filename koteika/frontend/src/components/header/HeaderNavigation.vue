@@ -6,7 +6,7 @@
   <nav class="navigation">
     <div class="navigation-inner">
       <router-link to="/" class="navigation-link">Главная</router-link>
-      <a href="#" class="navigation-link">Номера</a>
+      <router-link to="/catalog" class="navigation-link">Номера</router-link>
       <a href="#" class="navigation-link">Отзывы</a>
       <a href="#" class="navigation-link">О нас</a>
     </div>
@@ -14,7 +14,6 @@
       <router-link to="/register" class="navigation-link">Регистрация</router-link>
       <a href="#" class="navigation-link">Авторизация</a>
     </div>
-
   </nav>
 </template>
 

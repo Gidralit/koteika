@@ -1,7 +1,7 @@
 <script setup>
 import {useMetaStore} from "@/stores/meta.js";
 import {storeToRefs} from "pinia";
-import { LandingBanner } from "@/components/index.js";
+import {LandingBanner, ReviewList} from "@/components/index.js";
 import { RoomList } from "@/components/index.js";
 import { AboutUs } from "@/components/index.js";
 
@@ -17,6 +17,12 @@ import { AboutUs } from "@/components/index.js";
     </div>
   </section>
   <about-us />
+  <section class="reviews">
+    <div class="container">
+      <h2 class="reviews-title font-bold">Отзывы</h2>
+      <ReviewList />
+    </div>
+  </section>
 </main>
 </template>
 
@@ -26,6 +32,11 @@ import { AboutUs } from "@/components/index.js";
   &-title{
     font-size: 36px;
     margin-bottom: 40px;
+  }
+}
+.reviews{
+  &-title{
+    font-size: 36px;
   }
 }
 </style>

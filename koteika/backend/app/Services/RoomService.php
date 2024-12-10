@@ -3,8 +3,41 @@ namespace App\Services;
 
 use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Gate;
 
-class RoomService{
+
+class RoomService
+{
+
+    public function authorizeAdmin()
+    {
+        Gate::authorize('admin', Room::class);
+    }
+    public function editStatus($request, $id): JsonResponse
+    {
+        if (!auth()->check()) {
+            return response()->json(['message' => 'unauthenticated'], 401);
+        }
+
+        $room = Room::find($id);
+        if (!$room) {
+            return response()->json(['message' => 'room not found'], 404);
+        }
+
+        if (Gate::denies('admin', $room)) {
+            return response()->json(["message" => "forbidden"], 403);
+        }
+
+        if ($request->has('status')) {
+            $room->status = $request->status;
+        }
+
+        $room->save();
+
+        return response()->json($room, 200);
+    }
+
     public function applyFiltersAndSort(Builder $query, $request){
         $this->applyPriceFilter($query, $request);
         $this->applyDimensionsFilter($query, $request);
@@ -75,6 +108,40 @@ class RoomService{
         }else{
             $rooms = $query->orderBy('price', 'asc')->get();
             return response()->json($rooms);
-        }  
+        }
     }
+    public function createRoom($data)
+    {
+        $room = Room::create($data);
+
+        if (isset($data['photos'])) {
+            foreach ($data['photos'] as $photo) {
+                $path = $photo->store('photos', 'public');
+
+            }
+        }
+
+        if (isset($data['equipment'])) {
+            $room->equipment()->attach($data['equipment']);
+        }
+
+        return $room;
+    }
+
+    public function updateRoom(Room $room, $data)
+    {
+        $room->update(array_filter($data));
+
+        if (array_key_exists('equipment', $data)) {
+            $room->equipment()->sync($data['equipment']);
+        }
+
+        return $room;
+    }
+
+    public function deleteRoom(Room $room)
+    {
+        $room->delete();
+    }
+
 }
