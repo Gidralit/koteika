@@ -60,6 +60,10 @@ import {RoomList} from "@/components/index.js";
               </div>
             </div>
           </div>
+          <div class="filter-btn">
+            <button class="filter-btn__orange font-regular">Применить</button>
+            <button class="filter-btn__grey font-regular">Сбросить фильтр</button>
+          </div>
         </aside>
         <RoomList :is-main="false" />
       </div>
@@ -129,13 +133,34 @@ import {RoomList} from "@/components/index.js";
       display: flex;
       flex-direction: column;
       gap: 15px;
-      height: 300px;
+      max-height: 150px;
       overflow-y: scroll;
 
       &__items{
         display: flex;
         gap: 10px;
         align-items: center;
+      }
+    }
+    &-btn{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      &__orange{
+        border: none;
+        background: var(--main-accent);
+        font-size: 16px;
+        padding: 12px 0;
+        border-radius: 5px;
+      }
+
+      &__grey{
+        border: none;
+        background: #C8C8C8;
+        font-size: 16px;
+        padding: 12px 0;
+        border-radius: 5px;
       }
     }
   }

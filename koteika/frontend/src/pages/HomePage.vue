@@ -38,6 +38,7 @@ import { AboutUs } from "@/components/index.js";
     margin-bottom: 40px;
   }
 }
+
 .reviews{
   &-title{
     font-size: 36px;
