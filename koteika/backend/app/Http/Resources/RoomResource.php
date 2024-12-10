@@ -11,7 +11,7 @@ class RoomResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'area' => ($this->width)*($this->lenght),
+            'area' => $this->width * $this->lenght,
             'price' => $this->price,
             'show_on_homepage' => $this->show_on_homepage,
             'equipment' => EquipmentResource::collection($this->whenLoaded('equipment')),
