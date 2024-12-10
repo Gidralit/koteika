@@ -32,6 +32,7 @@ import { AboutUs } from "@/components/index.js";
 <style scoped lang="scss">
 .rooms{
   margin-bottom: 80px;
+
   &-title{
     font-size: 36px;
     margin-bottom: 40px;
