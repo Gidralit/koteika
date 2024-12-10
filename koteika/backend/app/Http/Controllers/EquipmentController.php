@@ -4,53 +4,46 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EquipmentRequest;
 use App\Models\Equipment;
+use App\Services\EquipmentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 
 class EquipmentController extends Controller
 {
     public function index(): JsonResponse
     {
-        Gate::authorize('index', Equipment::class);
         return response()->json(Equipment::all());
     }
 
-    public function create(EquipmentRequest $request)
-    {
-        Gate::authorize('create', Equipment::class);
-        if ($request->hasFile('icon')) {
-            $iconPath = $request->file('icon')->store('equipment/icons');
-            $request->merge(['icon' => $iconPath]);
-        }
+    protected $equipmentService;
 
-        $equipment = Equipment::create($request->validated());
+    public function __construct(EquipmentService $equipmentService)
+    {
+        $this->equipmentService = $equipmentService;
+    }
+
+    public function store(EquipmentRequest $request): JsonResponse
+    {
+        $this->equipmentService->authorizeAdmin();
+        $equipment = $this->equipmentService->createEquipment($request->validated());
+
         return response()->json($equipment, 201);
     }
-    public function edit(EquipmentRequest $request, Equipment $equipment)
+
+    public function update(EquipmentRequest $request, Equipment $equipment): JsonResponse
     {
-        Gate::authorize('edit', Equipment::class);
-        if ($request->hasFile('icon')) {
+        $this->equipmentService->authorizeAdmin();
+        $updatedEquipment = $this->equipmentService->updateEquipment($equipment, $request->validated());
 
-            if ($equipment->icon) {
-                Storage::delete($equipment->icon);
-            }
-            $iconPath = $request->file('icon')->store('equipment/icons');
-            $request->merge(['icon' => $iconPath]);
-        }
-
-        $equipment->update($request->validated());
-        return response()->json($equipment);
+        return response()->json(['message' => 'Оборудование успешно обновлено.', 'data' => $updatedEquipment], 200);
     }
-    public function destroy(Equipment $equipment)
+
+    public function destroy(Equipment $equipment): JsonResponse
     {
-        Gate::authorize('destroy', Equipment::class);
-        if ($equipment->icon) {
-            Storage::delete($equipment->icon);
-        }
-        $equipment->delete();
-        return response()->json(null, 204);
+        $this->equipmentService->authorizeAdmin();
+        $this->equipmentService->deleteEquipment($equipment);
+
+        return response()->json(['message' => 'Оборудование успешно удалено.'], 202);
     }
 
 }

@@ -14,7 +14,7 @@ class HeaderRequest extends FormRequest
     }
 
 
-    public function rules(): array // правила валидации
+    public function rules(): array
     {
         return [
             'title' => 'sometimes|required|string|max:255',
@@ -23,7 +23,7 @@ class HeaderRequest extends FormRequest
         ];
     }
 
-    public function messages(): array // сообщения при неуспешной валидации
+    public function messages(): array
     {
         return [
             'title.required' => 'Заполните название при редактировании',

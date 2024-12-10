@@ -26,21 +26,13 @@ class AuthController extends Controller
         return response()->json(['user' => $user], 201);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->only('email', 'password');
+        $result = $this->userService->loginUser($credentials);
 
-        if(auth()->attempt($credentials)){
-            $user = auth()->user();
-            $token = $user->createToken('kotiki')->plainTextToken;
-
-            return response()->json(
-                [
-                    'token' => $token,
-                    'user' => $user
-                ],
-                    200,
-                    ['Content-Type' => 'application/json; charset=utf-8'],
-                    JSON_UNESCAPED_UNICODE);
+        if ($result) {
+            return response()->json($result, 201);
         }
 
         return response()->json(['message' => 'Unauthorized'], 401);

@@ -9,7 +9,14 @@ class Room extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'width', 'height', 'length', 'equipment', 'photo_path', 'price'];
+    protected $fillable = [
+        'name',
+        'width',
+        'height',
+        'length',
+        'price',
+        'show_on_homepage',
+    ];
 
     protected $hidden = [
         'created_at',

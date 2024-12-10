@@ -9,7 +9,6 @@ use App\Models\Equipment;
 
 class RoomSeeder extends Seeder
 {
-    
     public function run(): void
     {
         Room::factory()

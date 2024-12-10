@@ -14,7 +14,7 @@ class ContactRequest extends FormRequest
     }
 
 
-    public function rules(): array // правила валидации
+    public function rules(): array
     {
         return [
             'address' => 'sometimes|required|string|max:255',
@@ -29,7 +29,7 @@ class ContactRequest extends FormRequest
         ];
     }
 
-    public function messages(): array // сообщения при неуспешной валидации
+    public function messages(): array
     {
         return [
             'address.required' => 'Заполните адрес при редактировании',

@@ -5,9 +5,6 @@ namespace Database\Factories;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Room>
- */
 class RoomFactory extends Factory
 {
     protected $model = Room::class;
@@ -16,10 +13,12 @@ class RoomFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->sentence(2),
-            'dimensions' => $this->faker->randomFloat(2, 1, 10).','.$this->faker->randomFloat(2, 1, 10).','.$this->faker->randomFloat(2, 1, 10),
-            'status' => $this->faker->randomElement(['show', 'no_show']),
+            'width' => $this->faker->randomFloat(2, 1, 10),
+            'height' => $this->faker->randomFloat(2, 1, 10),
+            'length' => $this->faker->randomFloat(2, 1, 10),
             'photo_path' => 'Пхото нету',
             'price' => $this->faker->numberBetween(100, 1000),
+            'show_on_homepage' => $this->faker->boolean
         ];
     }
 }

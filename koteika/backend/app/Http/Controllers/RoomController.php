@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\RoomRequest;
+use App\Http\Resources\RoomResource;
+use App\Models\Equipment;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use App\Models\Room;
 use App\Services\RoomService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    protected $roomService;
+    protected RoomService $roomService;
 
     public function __construct(RoomService $roomService){
         $this->roomService = $roomService;
@@ -30,16 +32,43 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
-    public function store(Request $request) //создание номера админом(использовать политику)
+    public function store(RoomRequest $request)
     {
+        $this->roomService->authorizeAdmin();
+        $validatedData = $request->validated();
+        $room = $this->roomService->createRoom($validatedData);
 
-
+        return response()->json(new RoomResource($room), 201);
     }
 
-    public function show(int $id)// Показать один номер
+    public function show($room)
     {
-        //
+        $room = Room::with('equipment')->findOrFail($room);
+        return new RoomResource($room);
     }
+
+    public function update(RoomRequest $request, Room $room)
+    {
+        $this->roomService->authorizeAdmin();
+        $validatedData = $request->validated();
+        $room = $this->roomService->updateRoom($room, $validatedData);
+
+        return response()->json(new RoomResource($room), 200);
+    }
+
+    public function destroy(Room $room)
+    {
+        $this->roomService->authorizeAdmin();
+        $this->roomService->deleteRoom($room);
+        return response()->json(['message' => 'Комната успешно удалена'], 201);
+    }
+
+
+    public function editStatusRoom(Request $request, $id): JsonResponse
+    {
+        return $this->roomService->editStatus($request, $id);
+    }
+
     public function reservationRoom(ReservationRequest $request, Room $room)
     {
         if (!$room) {
@@ -67,15 +96,5 @@ class RoomController extends Controller
         }
         $reservation->delete();
         return response()->json(['message' => 'Бронирование успешно отменено'], 200);
-    }
-
-    public function update(Request $request, string $id) // Изменить статус номера админом(использовать политику)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
     }
 }
