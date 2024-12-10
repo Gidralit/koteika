@@ -69,6 +69,7 @@ const props = defineProps({
     box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
     background: #fff;
     border-radius: 10px;
+    align-self: flex-start;
 
     &__title{
       font-size: 28px;

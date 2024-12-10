@@ -1,6 +1,10 @@
 <script setup>
-
 import {RoomList} from "@/components/index.js";
+import {storeToRefs} from "pinia";
+import {useRoomStore} from "@/stores/room.js";
+
+const { filters } = storeToRefs(useRoomStore())
+const { getRoom } = useRoomStore()
 </script>
 
 <template>
@@ -14,21 +18,21 @@ import {RoomList} from "@/components/index.js";
             <div class="filter-field__block">
               <div class="filter-by-price">
                 <label class="filter-price-label font-bold" for="from">от</label>
-                <input class="filter-input font-regular" id="from" type="number" placeholder="10р">
+                <input class="filter-input font-regular" v-model="filters.min_price" id="from" type="number" placeholder="">
               </div>
               <div class="filter-by-price">
                 <label class="filter-label font-bold" for="to">до</label>
-                <input class="filter-input font-regular" id="to" type="number" placeholder="30р">
+                <input class="filter-input font-regular" v-model="filters.max_price" id="to" type="number" placeholder="30р">
               </div>
             </div>
           </div>
           <div class="filter-field">
             <h3 class="filter-field__title font-bold">Площадь</h3>
             <select class="filter-select font-bold" name="" id="">
-              <option class="filter-option font-bold" value="16 кв.м">16кв</option>
-              <option class="filter-option font-bold" value="16 кв.м">16кв</option>
-              <option class="filter-option font-bold" value="16 кв.м">16кв</option>
-              <option class="filter-option font-bold" value="16 кв.м">16кв</option>
+              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
+              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
+              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
+              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
             </select>
           </div>
           <div class="filter-field">
@@ -61,7 +65,7 @@ import {RoomList} from "@/components/index.js";
             </div>
           </div>
           <div class="filter-btn">
-            <button class="filter-btn__orange font-regular">Применить</button>
+            <button class="filter-btn__orange font-regular" @click="getRoom()">Применить</button>
             <button class="filter-btn__grey font-regular">Сбросить фильтр</button>
           </div>
         </aside>
@@ -152,12 +156,14 @@ import {RoomList} from "@/components/index.js";
         background: var(--main-accent);
         font-size: 16px;
         padding: 12px 0;
+        cursor: pointer;
         border-radius: 5px;
       }
 
       &__grey{
         border: none;
         background: #C8C8C8;
+        cursor: pointer;
         font-size: 16px;
         padding: 12px 0;
         border-radius: 5px;

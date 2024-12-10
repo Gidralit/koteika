@@ -7,7 +7,7 @@ export const useRoomStore = defineStore('room', () => {
     const filters = reactive({
         order_by: 'desc',
         min_price: 0,
-        max_price: 9999999,
+        max_price: null,
         equipments_names: '',
         dimensions: ''
     })
