@@ -8,19 +8,11 @@ use Illuminate\Support\Facades\Validator;
 
 class EditUserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -28,13 +20,13 @@ class EditUserRequest extends FormRequest
             'email' => 'email|unique:users',
             'phone' => 'string|regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/|unique:users',
             'password' => 'string|min:8|confirmed',
-            'avatar' => 'image|mimes:jpeg,png|max:2048', 
+            'avatar' => 'image|mimes:jpeg,png|max:2048',
         ];
     }
 
     public function messages():array{
         return[
-            'name.regex' => 'Имя может содержать только русские букавы',
+            'name.regex' => 'Имя может содержать только русские буквы',
             'phone.regex' => 'Телефон не соответствует формату +7(xxx)xxx-xx-xx',
             'phone.unique' => 'Данный номер телефона уже занят, попробуйте другой',
             'email.email' => 'Почта не соответствует email формату',

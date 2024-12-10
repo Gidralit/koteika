@@ -2,68 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\HeaderRequest;
 use App\Models\Header;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Gate;
 
 class HeaderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): JsonResponse
     {
         $headers = Header::all();
-        return response()->json($headers, 200, [
-            'Content-Type' => 'application/json; charset=utf-8',
-        ], JSON_UNESCAPED_UNICODE);
+        return response()->json($headers, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function update(HeaderRequest $request): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        Gate::authorize('update', Header::class);
+        $header = Header::firstOrFail();
+        $dataToUpdate = $request->only(['title', 'text', 'city']);
+        $header->update(array_filter($dataToUpdate));
+        return response()->json($header, 200);
     }
 }

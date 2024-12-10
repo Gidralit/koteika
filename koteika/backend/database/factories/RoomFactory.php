@@ -5,9 +5,6 @@ namespace Database\Factories;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Room>
- */
 class RoomFactory extends Factory
 {
     protected $model = Room::class;
@@ -22,6 +19,7 @@ class RoomFactory extends Factory
             'status' => $this->faker->randomElement(['show', 'no_show']),
             'photo_path' => '',
             'price' => $this->faker->numberBetween(100, 1000),
+            'show_on_homepage' => $this->faker->boolean
         ];
     }
 }

@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Policies;
-
 use App\Models\User;
 
-class RoomPolicy
+class ContactPolicy
 {
-    public function admin(User $user)
+    public function update(User $user)
     {
         return $user->role === 'admin';
     }
-
 }
