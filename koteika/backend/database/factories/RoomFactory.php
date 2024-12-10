@@ -16,7 +16,9 @@ class RoomFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->sentence(2),
-            'dimensions' => $this->faker->randomFloat(2, 1, 10).','.$this->faker->randomFloat(2, 1, 10).','.$this->faker->randomFloat(2, 1, 10),
+            'width' => $this->faker->randomFloat(2, 1, 10),
+            'height' => $this->faker->randomFloat(2, 1, 10),
+            'length' => $this->faker->randomFloat(2, 1, 10),
             'status' => $this->faker->randomElement(['show', 'no_show']),
             'photo_path' => '',
             'price' => $this->faker->numberBetween(100, 1000),
