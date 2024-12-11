@@ -64,9 +64,17 @@ class RoomController extends Controller
     }
 
 
-    public function editStatusRoom(Request $request, $id): JsonResponse
+    public function updateShowOnHomepage(Request $request, $id)
     {
-        return $this->roomService->editStatus($request, $id);
+        $this->roomService->authorizeAdmin();
+        $room = Room::findOrFail($id);
+        $validatedData = $request->validate([
+            'show_on_homepage' => 'required|boolean',
+        ]);
+        $room->show_on_homepage = $validatedData['show_on_homepage'];
+        $room->save();
+
+        return response()->json($room);
     }
 
 
