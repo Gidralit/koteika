@@ -69,6 +69,7 @@ class RoomController extends Controller
         return $this->roomService->editStatus($request, $id);
     }
 
+
     public function reservationRoom(ReservationRequest $request, Room $room)
     {
         if (!$room) {
