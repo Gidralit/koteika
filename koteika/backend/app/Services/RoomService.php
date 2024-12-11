@@ -42,12 +42,7 @@ class RoomService
     protected function applyDimensionsFilter(Builder $query, $request){
         if(!is_null($request->input('dimensions'))){
             $dimensions = $request->input('dimensions');
-            $arrayNumbers = explode(',', $dimensions);
-            $arrayDimensions = [];
-
-            for($i = 0; $i<count($arrayNumbers); $i += 3){
-                $arrayDimensions[] = trim($arrayNumbers[$i]).','.trim($arrayNumbers[$i+1]).','.trim($arrayNumbers[$i+2]);
-            }
+            $arrayDimensions = explode(',', $dimensions);
 
             if (!empty($arrayDimensions)) {
                 // Используем orWhere, чтобы охватить любые подходящие размеры

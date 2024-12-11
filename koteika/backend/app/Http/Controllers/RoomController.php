@@ -77,6 +77,7 @@ class RoomController extends Controller
         return response()->json($room);
     }
 
+
     public function reservationRoom(ReservationRequest $request, Room $room)
     {
         if (!$room) {
