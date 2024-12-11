@@ -26,7 +26,6 @@ class EquipmentController extends Controller
     {
         $this->equipmentService->authorizeAdmin();
         $equipment = $this->equipmentService->createEquipment($request->validated());
-
         return response()->json($equipment, 201);
     }
 
