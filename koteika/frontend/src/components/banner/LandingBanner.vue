@@ -3,7 +3,7 @@
 </script>
 
 <template>
-<section class="banner">
+<section class="banner" id="banner">
   <div class="container">
     <article class="banner-inner">
       <div class="banner-text">

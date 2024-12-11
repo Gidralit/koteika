@@ -17,7 +17,7 @@ import { AboutUs } from "@/components/index.js";
     </div>
   </section>
   <AboutUs />
-  <section class="reviews">
+  <section class="reviews" id="reviews">
     <div class="container">
       <h2 class="reviews-title font-bold">Отзывы</h2>
       <ReviewList />
