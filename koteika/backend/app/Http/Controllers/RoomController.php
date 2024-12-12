@@ -102,7 +102,7 @@ class RoomController extends Controller
             'description' => $room->description,
             'check_in_date' => $request->check_in,
             'check_out_date' => $request->check_out,
-            ],
+        ],
         );
         return response()->json(['message' => 'Комната успешно забронирована'], 201);
     }

@@ -23,7 +23,13 @@ class Room extends Model
         'updated_at'
     ];
 
-    public function equipment(){
+    public function equipment()
+    {
         return $this->belongsToMany(Equipment::class, 'equipment_room');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }
