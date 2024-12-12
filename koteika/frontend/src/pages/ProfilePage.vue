@@ -10,8 +10,11 @@
       <div class="profile-avatar">
         <img src="" alt="">
       </div>
-      <div class="profile-information">
-
+      div.profile
+      <div class="profile-info">
+        <p class="profile-info__name">Вася Пупкин</p>
+        <p class="profile-info__email">emailpro1337@gmail.com</p>
+        <p class="profile-info__telephone">+7(923)444-94-08</p>
       </div>
     </div>
   </div>

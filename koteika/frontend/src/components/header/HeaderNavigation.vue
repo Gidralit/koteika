@@ -31,7 +31,7 @@ const logoutFunc = () => {
     </template>
     <template v-else>
       <div class="register">
-        <router-link to="#" class="navigation-link">Личный профиль</router-link>
+        <router-link to="/profile" class="navigation-link">Личный профиль</router-link>
         <a href="#" class="navigation-link" @click="logoutFunc">Выйти из аккаунта</a>
       </div>
     </template>
