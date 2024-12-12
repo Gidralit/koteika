@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
+use Illuminate\Support\Facades\Gate;
 
 
 class ReservationController extends Controller
@@ -67,14 +68,13 @@ class ReservationController extends Controller
 
     public function index(Request $request)
     {
+        Gate::authorize('admin', Reservation::class);
         $query = Reservation::query();
 
-        // Фильтр по номеру
         if ($request->has('room_id')) {
             $query->where('room_id', $request->input('room_id'));
         }
 
-        // Получение всех заявок
         $reservations = $query->with('room', 'user')->get();
 
         return response()->json($reservations, 200);
@@ -82,13 +82,14 @@ class ReservationController extends Controller
 
     public function approveReservation($reservationId)
     {
+        Gate::authorize('admin', Reservation::class);
         $reservation = Reservation::find($reservationId);
         if (!$reservation) {
             return response()->json(['message' => 'Бронирование не найдено'], 404);
         }
 
 
-        $reservation->status = 'approved'; // Пример статуса
+        $reservation->status = 'approved';
         $reservation->save();
 
         return response()->json(['message' => 'Бронирование успешно одобрено'], 200);
@@ -96,6 +97,7 @@ class ReservationController extends Controller
 
     public function deleteReservation($reservationId)
     {
+        Gate::authorize('admin', Reservation::class);
         $reservation = Reservation::find($reservationId);
         if (!$reservation) {
             return response()->json(['message' => 'Бронирование не найдено'], 404);
