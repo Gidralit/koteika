@@ -71,7 +71,6 @@ onMounted(async () => {
     border: none;
     border-radius: 5px;
     background: var(--main-accent);
-    cursor: pointer;
     font-size: 16px;
   }
 }

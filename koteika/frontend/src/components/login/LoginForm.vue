@@ -100,7 +100,6 @@ const submit = handleSubmit((values) => {
     border: none;
     background: var(--main-accent);
     font-size: 20px;
-    cursor: pointer;
   }
 
   .red{

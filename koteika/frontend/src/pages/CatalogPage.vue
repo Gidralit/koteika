@@ -153,14 +153,12 @@ onMounted(() => {
         background: var(--main-accent);
         font-size: 16px;
         padding: 12px 0;
-        cursor: pointer;
         border-radius: 5px;
       }
 
       &__grey{
         border: none;
         background: #C8C8C8;
-        cursor: pointer;
         font-size: 16px;
         padding: 12px 0;
         border-radius: 5px;
@@ -173,6 +171,7 @@ onMounted(() => {
     padding: 12px 20px;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
   }
   .nothing-found{
     font-size: 32px;

@@ -123,7 +123,6 @@ const props = defineProps({
       background: var(--main-accent);
       color: var(--main-black);
       border: none;
-      cursor: pointer;
     }
 
   }

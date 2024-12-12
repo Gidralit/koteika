@@ -1,6 +1,5 @@
 @import 'reset.css';
 @import "variables.css";
-@import "common.css";
 @import "fonts.css";
 
 *{
@@ -18,4 +17,8 @@ body{
 .container{
     max-width: 1720px;
     margin: 0 auto;
+}
+
+button{
+    cursor: pointer;
 }
