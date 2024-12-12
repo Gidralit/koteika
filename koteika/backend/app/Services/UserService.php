@@ -11,7 +11,7 @@ class UserService{
         if(isset($data['avatar'])){
             $filename = Str::random(10).'.'.$data['avatar']->extension();
             $data['avatar']->storeAs('avatars', $filename,'public');
-            $data['avatar'] = 'storage/avatars/'.$filename;
+            $data['avatar'] = 'avatars/'.$filename;
         }
         $data['password'] = Hash::make($data['password']);
         return User::Create($data);

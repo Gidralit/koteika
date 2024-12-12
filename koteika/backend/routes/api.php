@@ -27,6 +27,7 @@ Route::prefix('booking')->group(function () {
     Route::get('/rooms', [RoomController::class, 'index']);
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
     Route::get('/reviews/random', [ReviewController::class, 'randomCountReviews']);
+    Route::post('/review/create', [ReviewController::class, 'create']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:api')->apiResource('/user', UserController::class);
