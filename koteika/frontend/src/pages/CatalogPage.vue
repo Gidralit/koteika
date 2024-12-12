@@ -3,13 +3,13 @@ import {RoomList} from "@/components/index.js";
 import {storeToRefs} from "pinia";
 import {useRoomStore} from "@/stores/room.js";
 import {onMounted} from "vue";
-import {ArrowDownIcon} from "@/components/icons/index.js";
 
-const { filters, initFilters } = storeToRefs(useRoomStore())
-const { getRoom, getFilters } = useRoomStore()
+const { filters, initFilters, equipments, rooms } = storeToRefs(useRoomStore())
+const { getRoom, getFilters, getEquipment, resetFilter } = useRoomStore()
 
 onMounted(() => {
   getFilters()
+  getEquipment()
 })
 
 </script>
@@ -19,7 +19,7 @@ onMounted(() => {
     <div class="container">
       <div class="catalog-top">
         <h2 class="catalog-title">Каталог</h2>
-        <select class="sorting-price font-regular" v-model="filters.order_by"> По цене
+        <select class="sorting-price font-regular" v-model="filters.order_by">
           <option value="desc">По убыванию</option>
           <option value="asc">По возрастанию</option>
         </select>
@@ -35,50 +35,31 @@ onMounted(() => {
               </div>
               <div class="filter-by-price">
                 <label class="filter-label font-bold" for="to">до</label>
-                <input class="filter-input font-regular" v-model="filters.max_price" id="to" type="number" :placeholder="`${initFilters.max_price}п`">
+                <input class="filter-input font-regular" v-model="filters.max_price" id="to" type="number" :placeholder="`${initFilters.max_price}р`">
               </div>
             </div>
           </div>
           <div class="filter-field">
             <h3 class="filter-field__title font-bold">Площадь</h3>
-            <select class="filter-select font-bold" name="" id="">
-              <option class="filter-option font-bold" value="16 кв.м" v-for="size in initFilters.sizes">{{ size }} кв.м</option>
+            <select class="filter-select font-bold" v-model="filters.dimensions">
+              <option class="filter-option font-bold" :value="size" v-for="size in initFilters.sizes">{{ size }} кв.м</option>
             </select>
           </div>
           <div class="filter-field">
             <h3 class="filter-field__title font-bold">Оснащение</h3>
             <div class="filter-equipment">
-              <div class="filter-equipment__items">
-                <input id="equipment" type="checkbox">
-                <label for="equipment">Когтеточка</label>
-              </div>
-              <div class="filter-equipment__items">
-                <input id="equipment1" type="checkbox">
-                <label for="equipment1">Когтеточка</label>
-              </div>
-              <div class="filter-equipment__items">
-                <input id="equipment2" type="checkbox">
-                <label for="equipment2">Когтеточка</label>
-              </div>
-              <div class="filter-equipment__items">
-                <input id="equipment3" type="checkbox">
-                <label for="equipment3">Когтеточка</label>
-              </div>
-              <div class="filter-equipment__items">
-                <input id="equipment4" type="checkbox">
-                <label for="equipment4">Когтеточка</label>
-              </div>
-              <div class="filter-equipment__items">
-                <input id="equipment5" type="checkbox">
-                <label for="equipment5">Когтеточка</label>
+              <div class="filter-equipment__items" v-for="equipment in equipments">
+                <input :id="`equipment-${equipment.name}`" type="checkbox" :value="equipment.name" v-model="filters.equipments_names">
+                <label :for="`equipment-${equipment.name}`">{{ equipment.name }}</label>
               </div>
             </div>
           </div>
           <div class="filter-btn">
             <button class="filter-btn__orange font-regular" @click="getRoom()">Применить</button>
-            <button class="filter-btn__grey font-regular">Сбросить фильтр</button>
+            <button class="filter-btn__grey font-regular" @click="resetFilter()">Сбросить фильтр</button>
           </div>
         </aside>
+        <h3 class="nothing-found" v-if="!rooms.length">Ничего не найдено</h3>
         <RoomList :is-main="false" />
       </div>
     </div>
@@ -192,6 +173,10 @@ onMounted(() => {
     padding: 12px 20px;
     color: white;
     border-radius: 5px;
+  }
+  .nothing-found{
+    font-size: 32px;
+    text-align: center;
   }
 }
 </style>

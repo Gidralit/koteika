@@ -18,7 +18,7 @@ onMounted(async () => {
     <div class="profile-block">
       <h2>Ваш профиль:</h2>
       <div class="profile-content">
-        <img class="profile-avatar" :src="`http://localhost/${ profileData.avatar }`" alt="">
+        <img class="profile-avatar" :src="`http://localhost/storage${ profileData.avatar }`" alt="">
         <div class="profile-info">
           <div class="profile-info-block">
             <p class="profile-info__name">{{ profileData.name }}</p>
@@ -63,6 +63,7 @@ onMounted(async () => {
   &-avatar{
     width: 200px;
     height: 200px;
+    border-radius: 100%;
   }
   &-change-btn{
     padding: 12px 11px;

@@ -15,8 +15,6 @@ export const useAuthStore = defineStore('auth', () => {
         Object.values(errors).forEach(error => {
             errorStatusReg.value.push(error[0])
         })
-        console.log(errorStatusReg.value)
-        console.log(errors)
     }
 
     const setToken = (token) => {

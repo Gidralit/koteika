@@ -1,6 +1,9 @@
 <script setup>
 import {LawIcon} from "@/components/icons/index.js";
 import defaultPhoto from '@/assets/img/default-img.jpg'
+import {storeToRefs} from "pinia";
+import {useAuthStore} from "@/stores/auth.js";
+const { isAuth } = storeToRefs(useAuthStore())
 
 const props = defineProps({
   id: {
@@ -49,7 +52,7 @@ const props = defineProps({
     <p>{{ square }} кв.м</p>
     <div class="room-card__price">
       <p>{{ price }}р.</p>
-      <button class="room-card__btn font-bold">Забронировать</button>
+      <button class="room-card__btn font-bold" v-if="isAuth">Забронировать</button>
     </div>
   </div>
 </article>
