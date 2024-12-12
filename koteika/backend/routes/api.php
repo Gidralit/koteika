@@ -30,6 +30,7 @@ Route::prefix('booking')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:api')->apiResource('/user', UserController::class);
+    Route::get('/filters_data', [RoomController::class, 'dataForFilters']);
 });//Доступно всем
 
 Route::prefix('api-reservation')->middleware(['auth:sanctum'])->group(function () {
