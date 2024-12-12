@@ -10,12 +10,14 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
+            $table->integer('pets_count')->default(0);
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('room_id')->constrained()->onDelete('cascade');
             $table->date('check_in_date');
-            $table->date('check_out_date');
+            $table->date('check_out_date',);
+            $table->string('pets_names')->nullable();
             $table->decimal('price', 10, 2);
-            $table->text('description');
+            $table->enum('status', ['pending', 'approved'])->default("pending");
             $table->timestamps();
         });
     }

@@ -77,32 +77,4 @@ class RoomController extends Controller
         return response()->json($room);
     }
 
-    public function reservationRoom(ReservationRequest $request, Room $room)
-    {
-        if (!$room) {
-            return response()->json(['message' => 'Комната не найдена'], 404);
-        }
-        Reservation::create([
-            'user_id' => Auth::id(),
-            'room_id' => $room->id,
-            'price' => $room->price,
-            'description' => $room->description,
-            'check_in_date' => $request->check_in,
-            'check_out_date' => $request->check_out,
-            ],
-        );
-        return response()->json(['message' => 'Комната успешно забронирована'], 201);
-    }
-    public function cancelReservation($reservationId)
-    {
-        $reservation = Reservation::find($reservationId);
-        if (!$reservation) {
-            return response()->json(['message' => 'Бронирование не найдено'], 404);
-        }
-        if ($reservation->user_id !== Auth::id()) {
-            return response()->json(['message' => 'У вас нет прав на отмену этого бронирования'], 403);
-        }
-        $reservation->delete();
-        return response()->json(['message' => 'Бронирование успешно отменено'], 200);
-    }
 }

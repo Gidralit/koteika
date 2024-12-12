@@ -12,12 +12,20 @@ class Reservation extends Model
 
     protected $fillable = [
         'user_id',
-        'product_id',
+        'room_id',
+        'pets_count',
         'price',
-        'description',
         'check_in_date',
-        'check_out_date'
+        'check_out_date',
+        'status',
+        'pets_names'
     ];
+
+    public function approve()
+    {
+        $this->status = 'approved'; // Устанавливаем статус как 'approved'
+        $this->save(); // Сохраняем изменения в базе данных
+    }
 
     public function user()
     {
