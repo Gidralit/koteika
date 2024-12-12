@@ -22,7 +22,11 @@ class RoomRequest extends FormRequest
             'price' => 'sometimes|required|integer',
             'equipment' => 'sometimes|array|nullable',
             'equipment.*' => 'exists:equipment,id',
-            'photos.*' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'photo_path1' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'photo_path2' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'photo_path3' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'photo_path4' => 'nullable|image|mimes:jpeg,png|max:2048',
+            'photo_path5' => 'nullable|image|mimes:jpeg,png|max:2048',
             'show_on_homepage' => 'sometimes|boolean',
         ];
     }
