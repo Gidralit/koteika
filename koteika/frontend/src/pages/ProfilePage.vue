@@ -38,6 +38,7 @@ onMounted(async () => {
   &-block{
     box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
     padding: 87px 144px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     gap: 20px;
