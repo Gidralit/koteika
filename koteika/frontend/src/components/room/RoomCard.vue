@@ -11,9 +11,9 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  dimensions: {
-    type: String,
-    default: ''
+  square: {
+    type: Number,
+    default: null
   },
   photo_path: {
     type: String,
@@ -38,19 +38,15 @@ const props = defineProps({
 <article class="room-card">
   <div class="room-card__Image">
     <div class="room-card__image" :style="{ background: `url(${ photo_path || defaultPhoto }) no-repeat`, backgroundSize: 'cover'}">
-      <div class="room-card__overlay">
+      <div class="room-card__overlay" v-for="equip in equipment">
         <LawIcon></LawIcon>
-        <p>Игрушки</p>
-      </div>
-      <div class="room-card__overlay">
-        <LawIcon></LawIcon>
-        <p>Когтеточка</p>
+        <p>{{ equip.name }}</p>
       </div>
     </div>
   </div>
   <h3 class="room-card__title">{{ name }}</h3>
   <div class="room-card__bottom">
-    <p>{{ dimensions }}</p>
+    <p>{{ square }} кв.м</p>
     <div class="room-card__price">
       <p>{{ price }}р.</p>
       <button class="room-card__btn font-bold">Забронировать</button>
@@ -72,7 +68,7 @@ const props = defineProps({
     align-self: flex-start;
 
     &__title{
-      font-size: 28px;
+      font-size: 24px;
     }
 
     &__image {

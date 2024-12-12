@@ -75,6 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
         logout,
         errorStatusReg,
         errorStatusLog,
+        authToken,
         isAuth
     }
 })

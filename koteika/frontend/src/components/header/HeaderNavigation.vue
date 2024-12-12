@@ -21,7 +21,7 @@ const logoutFunc = () => {
       <router-link to="/" class="navigation-link">Главная</router-link>
       <router-link to="/room" class="navigation-link">Номера</router-link>
       <router-link to="/#reviews" class="navigation-link">Отзывы</router-link>
-      <router-link to="/#banner" class="navigation-link">О нас</router-link>
+      <router-link to="/#abous-us" class="navigation-link">О нас</router-link>
     </div>
     <template v-if="!isAuth">
       <div class="register">

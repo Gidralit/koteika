@@ -2,15 +2,28 @@
 import {RoomList} from "@/components/index.js";
 import {storeToRefs} from "pinia";
 import {useRoomStore} from "@/stores/room.js";
+import {onMounted} from "vue";
+import {ArrowDownIcon} from "@/components/icons/index.js";
 
-const { filters } = storeToRefs(useRoomStore())
-const { getRoom } = useRoomStore()
+const { filters, initFilters } = storeToRefs(useRoomStore())
+const { getRoom, getFilters } = useRoomStore()
+
+onMounted(() => {
+  getFilters()
+})
+
 </script>
 
 <template>
   <section class="catalog">
     <div class="container">
-      <h2 class="catalog-title">Каталог</h2>
+      <div class="catalog-top">
+        <h2 class="catalog-title">Каталог</h2>
+        <select class="sorting-price font-regular" v-model="filters.order_by"> По цене
+          <option value="desc">По убыванию</option>
+          <option value="asc">По возрастанию</option>
+        </select>
+      </div>
       <div class="catalog-block">
         <aside class="filter">
           <div class="filter-field">
@@ -18,21 +31,18 @@ const { getRoom } = useRoomStore()
             <div class="filter-field__block">
               <div class="filter-by-price">
                 <label class="filter-price-label font-bold" for="from">от</label>
-                <input class="filter-input font-regular" v-model="filters.min_price" id="from" type="number" placeholder="">
+                <input class="filter-input font-regular" v-model="filters.min_price" id="from" type="number" :placeholder="`${initFilters.min_price}р`">
               </div>
               <div class="filter-by-price">
                 <label class="filter-label font-bold" for="to">до</label>
-                <input class="filter-input font-regular" v-model="filters.max_price" id="to" type="number" placeholder="30р">
+                <input class="filter-input font-regular" v-model="filters.max_price" id="to" type="number" :placeholder="`${initFilters.max_price}п`">
               </div>
             </div>
           </div>
           <div class="filter-field">
             <h3 class="filter-field__title font-bold">Площадь</h3>
             <select class="filter-select font-bold" name="" id="">
-              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
-              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
-              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
-              <option class="filter-option font-bold" value="16 кв.м">16 кв.м</option>
+              <option class="filter-option font-bold" value="16 кв.м" v-for="size in initFilters.sizes">{{ size }} кв.м</option>
             </select>
           </div>
           <div class="filter-field">
@@ -77,6 +87,12 @@ const { getRoom } = useRoomStore()
 
 <style scoped lang="scss">
 .catalog{
+  &-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   &-title{
     font-size: 36px;
     padding: 38px 0;
@@ -169,6 +185,13 @@ const { getRoom } = useRoomStore()
         border-radius: 5px;
       }
     }
+  }
+  .sorting-price{
+    background: var(--main-green);
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    border-radius: 5px;
   }
 }
 </style>
