@@ -45,10 +45,9 @@ class RoomService
             $arrayDimensions = explode(',', $dimensions);
 
             if (!empty($arrayDimensions)) {
-                // Используем orWhere, чтобы охватить любые подходящие размеры
                 $query->where(function ($q) use ($arrayDimensions) {
                     foreach ($arrayDimensions as $dimension) {
-                        $q->orWhere('dimensions', '=', $dimension);
+                        $q->orWhere('square', '=', $dimension);
                     }
                 });
             }
