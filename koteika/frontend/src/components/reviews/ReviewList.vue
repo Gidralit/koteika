@@ -2,13 +2,28 @@
 import {ReviewCard} from "@/components/index.js";
 import { useReviewStore } from "@/stores/review.js";
 import { storeToRefs } from "pinia";
+import {ArrowLeftIcon, ArrowRightIcon} from "@/components/icons/index.js";
+import {ref} from "vue";
 
 const { reviewsData } = storeToRefs(useReviewStore())
+
+const translateValue = ref(-1)
+
+const arrowLeft = () => {
+  if (translateValue.value < 0){
+    translateValue.value++
+  }
+}
+const arrowRight = () => {
+  if (translateValue.value > -2 ){
+    translateValue.value--
+  }
+}
 
 </script>
 
 <template>
-<section class="reviews">
+<div class="review-list">
   <ReviewCard
       v-for="review in reviewsData"
       :key="review"
@@ -16,15 +31,37 @@ const { reviewsData } = storeToRefs(useReviewStore())
       :content="review.content"
       :image="review.image"
       :rating="review.rating"
+      :translateValue="translateValue"
   />
-</section>
+</div>
+<div class="arrows">
+  <div class="arrow-left" @click="arrowLeft">
+    <ArrowLeftIcon />
+  </div>
+  <div class="arrow-right" @click="arrowRight">
+    <ArrowRightIcon />
+  </div>
+</div>
 </template>
 
 <style scoped lang="scss">
-.reviews{
+.review-list{
   display: flex;
-  overflow: hidden;
   flex-wrap: nowrap;
   gap: 20px;
+  margin-bottom: 20px;
 }
+.arrows{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+
+  .arrow-left, .arrow-right{
+    padding: 17px 20px;
+    background: var(--main-accent);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
 </style>

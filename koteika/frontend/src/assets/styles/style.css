@@ -12,7 +12,8 @@
 body{
     font-family: 'Comfortaa', sans-serif;
     min-height: 100vh;
-    color: var(--main-color)
+    color: var(--main-color);
+    overflow-x: hidden;
 }
 .container{
     max-width: 1720px;

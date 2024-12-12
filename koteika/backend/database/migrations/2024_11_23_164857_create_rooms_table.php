@@ -11,9 +11,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('width');
-            $table->float('height');
-            $table->float('length');
+            $table->integer('square');
             $table->integer('price');
             $table->string('photo_path')->nullable();
             $table->boolean('show_on_homepage')->default(false);

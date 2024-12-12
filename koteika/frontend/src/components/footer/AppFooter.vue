@@ -1,57 +1,62 @@
 <script setup>
-import { HeaderNavigation } from "@/components/index.js";
+import { FooterNavigation } from "@/components/index.js";
 import {useMetaStore} from "@/stores/meta.js";
 import {storeToRefs} from "pinia";
+import {UpArrowIcon} from "@/components/icons/index.js";
 
 const { headerData } = storeToRefs(useMetaStore())
-
 </script>
 
 <template>
-<header class="header">
-  <div class="header-inner container">
-    <router-link to="/" class="header-logo">
+<div class="footer">
+  <div class="footer-inner container">
+    <router-link to="/" class="footer-logo">
       <h1 class="logo font-bold">{{ headerData.title }}</h1>
       <p class="logo-slogan">{{ headerData.text }}</p>
     </router-link>
-    <p class="header-city">
-      <img src="@/assets/img/location.svg" alt="location">
-      {{ headerData.city }}
-    </p>
-    <header-navigation />
+    <FooterNavigation />
+    <div class="footer-scroll">
+      <p class="footer-scroll__text">Вернуться наверх</p>
+      <UpArrowIcon />
+    </div>
   </div>
-</header>
+</div>
 </template>
 
 <style scoped lang="scss">
-.header{
+.footer {
   display: flex;
+  background: var(--main-accent);
 
-  &-inner{
+  &-inner {
     display: flex;
     width: 100%;
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
   }
-  &-logo{
+
+  &-logo {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3px;
 
-    .logo{
+    .logo {
       font-size: 28px;
 
-      &-slogan{
+      &-slogan {
         font-size: 12px;
       }
     }
   }
-  &-city{
+  &-scroll{
     display: flex;
     gap: 5px;
     align-items: center;
+    &__text{
+
+    }
   }
 }
 </style>

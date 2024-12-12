@@ -1,3 +1,3 @@
 import { $api } from '@/api/index.js'
 
-export const getRooms = () => $api.get('rooms')
+export const getRooms = (params) => $api.get('rooms', { params })

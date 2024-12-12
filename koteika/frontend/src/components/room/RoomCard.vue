@@ -1,11 +1,43 @@
 <script setup>
 import {LawIcon} from "@/components/icons/index.js";
+import defaultPhoto from '@/assets/img/default-img.jpg'
+
+const props = defineProps({
+  id: {
+    type: Number,
+    default: null
+  },
+  name: {
+    type: String,
+    default: ''
+  },
+  dimensions: {
+    type: String,
+    default: ''
+  },
+  photo_path: {
+    type: String,
+    default: ''
+  },
+  status: {
+    type: String,
+    default: ''
+  },
+  price: {
+    type: Number,
+    default: null
+  },
+  equipment: {
+    type: Array,
+    default: () => []
+  }
+})
 </script>
 
 <template>
 <article class="room-card">
   <div class="room-card__Image">
-    <div class="room-card__image">
+    <div class="room-card__image" :style="{ background: `url(${ photo_path || defaultPhoto }) no-repeat`, backgroundSize: 'cover'}">
       <div class="room-card__overlay">
         <LawIcon></LawIcon>
         <p>Игрушки</p>
@@ -16,11 +48,11 @@ import {LawIcon} from "@/components/icons/index.js";
       </div>
     </div>
   </div>
-  <h3 class="room-card__title">Кошачий рай</h3>
+  <h3 class="room-card__title">{{ name }}</h3>
   <div class="room-card__bottom">
-    <p>20 кв.м</p>
+    <p>{{ dimensions }}</p>
     <div class="room-card__price">
-      <p>1000р</p>
+      <p>{{ price }}р.</p>
       <button class="room-card__btn font-bold">Забронировать</button>
     </div>
   </div>
@@ -37,6 +69,7 @@ import {LawIcon} from "@/components/icons/index.js";
     box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
     background: #fff;
     border-radius: 10px;
+    align-self: flex-start;
 
     &__title{
       font-size: 28px;
@@ -44,8 +77,6 @@ import {LawIcon} from "@/components/icons/index.js";
 
     &__image {
       display: flex;
-      background: url("@/assets/img/RoomCard.png") no-repeat;
-      background-size: cover;
       min-height: 310px;
       width: 100%;
       border-radius: 10px 10px 0 0;

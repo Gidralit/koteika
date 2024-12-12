@@ -1,6 +1,4 @@
 <script setup>
-import { useReviewStore } from "@/stores/review.js";
-import { storeToRefs } from "pinia";
 import defaultAvatar from "@/assets/img/default-avatar.jpg"
 import { StarIcon } from "@/components/icons";
 
@@ -20,13 +18,17 @@ const props = defineProps({
   image: {
     type: String,
     default: null
+  },
+  translateValue: {
+    type: Number,
+    required: true
   }
 })
 
 </script>
 
 <template>
-<section class="review">
+<article class="review" :style="{translate: `${translateValue * 100}%`, transition: `${0.3}s` }">
   <div class="review-user-info">
     <img class="review-user-avatar" :src="image ?? defaultAvatar" alt="Дефолт аватарка">
     <p class="review-user-name">{{ email }}</p>
@@ -39,18 +41,19 @@ const props = defineProps({
         class="rating-star"
         v-for="star in rating" :key="star"/>
   </div>
-</section>
+</article>
 </template>
 
 <style scoped lang="scss">
 .review{
   padding: 20px;
   box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
-  width: 560px;
+  min-width: 560px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   border-radius: 10px;
+  justify-content: space-between;
 
   &-user-info{
     display: flex;

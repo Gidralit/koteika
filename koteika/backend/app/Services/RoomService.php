@@ -14,29 +14,6 @@ class RoomService
     {
         Gate::authorize('admin', Room::class);
     }
-    public function editStatus($request, $id): JsonResponse
-    {
-        if (!auth()->check()) {
-            return response()->json(['message' => 'unauthenticated'], 401);
-        }
-
-        $room = Room::find($id);
-        if (!$room) {
-            return response()->json(['message' => 'room not found'], 404);
-        }
-
-        if (Gate::denies('admin', $room)) {
-            return response()->json(["message" => "forbidden"], 403);
-        }
-
-        if ($request->has('status')) {
-            $room->status = $request->status;
-        }
-
-        $room->save();
-
-        return response()->json($room, 200);
-    }
 
     public function applyFiltersAndSort(Builder $query, $request){
         $this->applyPriceFilter($query, $request);
@@ -62,27 +39,21 @@ class RoomService
         }
     }
 
-    protected function applyDimensionsFilter(Builder $query, $request){
-        if(!is_null($request->input('dimensions'))){
-            $dimensions = $request->input('dimensions');
-            $arrayNumbers = explode(',', $dimensions);
-            $arrayDimensions = [];
+    // protected function applyDimensionsFilter(Builder $query, $request){
+    //     if(!is_null($request->input('dimensions'))){
+    //         $dimensions = $request->input('dimensions');
+    //         $arrayDimensions = explode(',', $dimensions);
 
-            for($i = 0; $i<count($arrayNumbers); $i += 3){
-                $arrayDimensions[] = trim($arrayNumbers[$i]).','.trim($arrayNumbers[$i+1]).','.trim($arrayNumbers[$i+2]);
-            }
+    //         if (!empty($arrayDimensions)) {
+    //             $query->where(function ($q) use ($arrayDimensions) {
+    //                 foreach ($arrayDimensions as $dimension) {
+    //                     $q->orWhere('dimensions', '=', $dimension);
+    //                 }
+    //             });
+    //         }
 
-            if (!empty($arrayDimensions)) {
-                // Используем orWhere, чтобы охватить любые подходящие размеры
-                $query->where(function ($q) use ($arrayDimensions) {
-                    foreach ($arrayDimensions as $dimension) {
-                        $q->orWhere('dimensions', '=', $dimension);
-                    }
-                });
-            }
-
-        }
-    }
+    //     }
+    // }
 
     protected function applyEquipmentFilter(Builder $query, $request){
         if($request->has('equipments_names')){

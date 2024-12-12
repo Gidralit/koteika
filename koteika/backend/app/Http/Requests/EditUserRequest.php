@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class EditUserRequest extends FormRequest
 {
@@ -35,5 +37,11 @@ class EditUserRequest extends FormRequest
             'avatar.mimes' => 'Изображение должно иметь разрешение jpeg или png',
             'avatar.max' => 'Максимальный размер файла 2 МБ',
         ];
+    }
+
+    protected function failedValidation(Validator $validator){
+        throw new HttpResponseException(response()->json([
+            'errors'=> $validator->errors()
+        ], 400));
     }
 }
