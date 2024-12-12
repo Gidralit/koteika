@@ -19,7 +19,7 @@ const logoutFunc = () => {
   <nav class="navigation">
     <div class="navigation-inner">
       <router-link to="/" class="navigation-link">Главная</router-link>
-      <router-link to="/catalog" class="navigation-link">Номера</router-link>
+      <router-link to="/room" class="navigation-link">Номера</router-link>
       <router-link to="/#reviews" class="navigation-link">Отзывы</router-link>
       <router-link to="/#banner" class="navigation-link">О нас</router-link>
     </div>

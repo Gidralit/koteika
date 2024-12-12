@@ -4,6 +4,7 @@ import RegisterPage from "@/pages/RegisterPage.vue";
 import CatalogPage from "@/pages/CatalogPage.vue";
 import LoginPage from "@/pages/LoginPage.vue";
 import RoomPage from "@/pages/RoomPage.vue";
+import ProfilePage from "@/pages/ProfilePage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,7 +13,8 @@ const router = createRouter({
     { path: '/register', name: 'register', component: RegisterPage },
     { path: '/login', name: 'login', component: LoginPage },
     { path: '/room', name: 'room', component: CatalogPage },
-    { path: '/room/:id', name: 'room', component: RoomPage}
+    { path: '/room/:id', name: 'room-id', component: RoomPage },
+    { path: '/profile', name: "profile", component: ProfilePage }
   ],
   scrollBehavior(to, from, savedPosition){
     if (to.hash){
