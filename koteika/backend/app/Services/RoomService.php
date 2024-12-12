@@ -39,22 +39,21 @@ class RoomService
         }
     }
 
-    protected function applyDimensionsFilter(Builder $query, $request){
-        if(!is_null($request->input('dimensions'))){
-            $dimensions = $request->input('dimensions');
-            $arrayDimensions = explode(',', $dimensions);
+    // protected function applyDimensionsFilter(Builder $query, $request){
+    //     if(!is_null($request->input('dimensions'))){
+    //         $dimensions = $request->input('dimensions');
+    //         $arrayDimensions = explode(',', $dimensions);
 
-            if (!empty($arrayDimensions)) {
-                // Используем orWhere, чтобы охватить любые подходящие размеры
-                $query->where(function ($q) use ($arrayDimensions) {
-                    foreach ($arrayDimensions as $dimension) {
-                        $q->orWhere('dimensions', '=', $dimension);
-                    }
-                });
-            }
+    //         if (!empty($arrayDimensions)) {
+    //             $query->where(function ($q) use ($arrayDimensions) {
+    //                 foreach ($arrayDimensions as $dimension) {
+    //                     $q->orWhere('dimensions', '=', $dimension);
+    //                 }
+    //             });
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
     protected function applyEquipmentFilter(Builder $query, $request){
         if($request->has('equipments_names')){
