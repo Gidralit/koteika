@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -19,19 +21,23 @@ class ReservationRequest extends FormRequest
     {
         return [
             'pets_names' => [
-                'required',
-                'string',
-                'regex:/^[а-яА-ЯёЁa-zA-Zs-]+$/',
-                function ($attribute, $value, $fail) {
-
-                    $namesArray = array_filter(array_map('trim', explode(',', $value)));
-                    $petsCount = (int) $this->pets_count;
-
-                    if (count($namesArray) !== $petsCount) {
-                        $fail("Количество имен питомцев должно соответствовать количеству питомцев ({$petsCount}).");
-                    }
-                },
+                'nullable',
+                'array',
             ],
+            'pets_names.*' => [
+                'string',
+            ],
+            function ($attribute, $value, $fail) {
+
+                $namesArray = array_filter(array_map('trim', explode(',', $value)));
+                $petsCount = (int)$this->pets_count;
+
+                if (count($namesArray) !== $petsCount) {
+                    $fail("Количество имен питомцев должно соответствовать количеству питомцев ({$petsCount}).");
+                }
+            },
+
+
             'check_in_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:today', function ($attribute, $value, $fail) {
                 if ($this->check_out_date && $this->isOverlapping($value, $this->check_out_date)) {
                     $fail('Выбранный промежуток пересекается с уже существующими бронями.');
@@ -52,7 +58,6 @@ class ReservationRequest extends FormRequest
         return [
             'pets_names.required' => 'Имя питомца обязательно.',
             'pets_names.string' => 'Имя питомца должно быть строкой.',
-            'pets_names.regex' => 'Имя питомца может содержать только буквы, пробелы и тире.',
             'check_in_date.required' => 'Дата заезда обязательна.',
             'check_in_date.date' => 'Дата заезда должна быть действительной датой.',
             'check_in_date.after_or_equal' => 'Дата заезда должна быть сегодня или позже.',
@@ -73,6 +78,7 @@ class ReservationRequest extends FormRequest
         $checkInDate = Carbon::createFromFormat('Y-m-d', $checkIn);
         $checkOutDate = Carbon::createFromFormat('Y-m-d', $checkOut);
 
+        // Получаем все существующие брони для данного номера
         $existingReservation = DB::table('reservations')
             ->where('room_id', $this->room_id)
             ->where(function ($query) use ($checkInDate, $checkOutDate) {
