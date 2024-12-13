@@ -36,4 +36,13 @@ class Reservation extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    protected $casts = [
+        'pets_names' => 'array',
+    ];
+    public function getPetsNamesAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
 }
