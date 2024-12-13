@@ -25,7 +25,6 @@ Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
 }); //Доступно авторизованным пользователям
 
 Route::prefix('booking')->group(function () {
-    Route::get('/equipments', [EquipmentController::class, 'index']);
     Route::get('/contacts', [ContactController::class, 'index']);
     Route::get('/headers', [HeaderController::class, 'index']);
     Route::get('/rooms', [RoomController::class, 'index']);

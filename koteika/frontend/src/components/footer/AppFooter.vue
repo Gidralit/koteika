@@ -16,7 +16,7 @@ const { headerData } = storeToRefs(useMetaStore())
     </router-link>
     <FooterNavigation />
     <div class="footer-scroll">
-      <p class="footer-scroll__text">Вернуться наверх</p>
+      <router-link to="/#header" class="footer-scroll__text">Вернуться наверх</router-link>
       <UpArrowIcon />
     </div>
   </div>

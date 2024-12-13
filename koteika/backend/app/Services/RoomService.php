@@ -82,7 +82,7 @@ class RoomService
             return response()->json($rooms);
         }
     }
-    
+
     public function createRoom(array $data)
     {   
         $room = Room::create($data);

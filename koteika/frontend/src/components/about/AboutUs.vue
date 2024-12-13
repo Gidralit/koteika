@@ -7,7 +7,7 @@ const { contactsData } = storeToRefs(useMetaStore())
 </script>
 
 <template>
-  <section class="about-us">
+  <section class="about-us" id="abous-us">
     <div class="container">
       <h2 class="about-us__title font-bold">О нас</h2>
       <div class="about-us-block">

@@ -8,7 +8,7 @@ const { headerData } = storeToRefs(useMetaStore())
 </script>
 
 <template>
-<header class="header">
+<header class="header" id="header">
   <div class="header-inner container">
     <router-link to="/" class="header-logo">
       <h1 class="logo font-bold">{{ headerData.title }}</h1>
