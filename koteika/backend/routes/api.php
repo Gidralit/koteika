@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReservationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\ContactController;
@@ -9,15 +10,18 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipmentController;
 
+
 Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/equipments', EquipmentController::class);
     Route::apiResource('/rooms', RoomController::class);
     Route::patch('/contacts', [ContactController::class, 'update']);
     Route::patch('/headers/update', [HeaderController::class, 'update']);
     Route::patch('/rooms/{room}/status', [RoomController::class, 'updateShowOnHomepage']);
-    Route::get('/reservation', [RoomController::class, 'view']);
-    Route::post('/reservation/{room}', [RoomController::class, 'reservationRoom']);
-    Route::delete('/reservation/{product_id}', [RoomController::class, 'cancelReservation']);
+    Route::get('/reservation', [ReservationController::class, 'index']);
+    Route::post('/reservation/{room}', [ReservationController::class, 'reservationRoom']);
+    Route::delete('/reservation/{id}', [ReservationController::class, 'cancelReservation']);
+    Route::post('/reservation/{id}/approve', [ReservationController::class, 'approveReservation']);
+    Route::post('/reviews', [ReviewController::class, 'store']);
 }); //Доступно авторизованным пользователям
 
 Route::prefix('booking')->group(function () {

@@ -5,6 +5,7 @@ use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 
 class RoomService
