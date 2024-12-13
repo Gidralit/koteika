@@ -16,9 +16,7 @@ class RoomRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|required|string|regex:/^[А-Яа-яЁёs]+$/u',
-            'width' => 'sometimes|required|numeric',
-            'height' => 'sometimes|required|numeric',
-            'length' => 'sometimes|required|numeric',
+            'square' => 'sometimes|required|integer',
             'price' => 'sometimes|required|integer',
             'equipment' => 'sometimes|array|nullable',
             'equipment.*' => 'exists:equipment,id',
@@ -33,18 +31,14 @@ class RoomRequest extends FormRequest
 
     public function messages():array{
         return[
-//            'name.required' => 'Название номера обязательно для заполнения',
-//            'name.regex' => 'Используйте кириллицу',
-//            'width.required' => 'Поле обязательно для заполнения',
-//            'width.numeric' => 'Используйте число',
-//            'height.required' => 'Поле обязательно для заполнения',
-//            'height.numeric' => 'Используйте число',
-//            'length.required' => 'Поле обязательно для заполнения',
-//            'length.numeric' => 'Используйте число',
-//            'price.required' => 'Поле обязательно для заполнения',
-//            'price.integer' => 'Используйте целое число',
-//            'equipment.array' => 'Должен содержать массив',
-//            'show_on_homepage.boolean' => 'Используйте true или false',
+           'name.required' => 'Название номера обязательно для заполнения',
+           'name.regex' => 'Используйте кириллицу',
+           'square.required' => 'Поле обязательно для заполнения',
+           'square.integer' => 'Используйте число',
+           'price.required' => 'Поле обязательно для заполнения',
+           'price.integer' => 'Используйте целое число',
+           'equipment.array' => 'Должен содержать массив',
+           'show_on_homepage.boolean' => 'Используйте true или false',
         ];
     }
 

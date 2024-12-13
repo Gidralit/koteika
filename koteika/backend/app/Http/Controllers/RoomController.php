@@ -41,7 +41,13 @@ class RoomController extends Controller
             return $room->square;
         });
 
-        return response()->json(['min_price' => $min_price, 'max_price' => $max_price, 'sizes' => $sizes]);
+        $equipments = Equipment::all();
+
+        $equipmentsNames = $equipments->map(function($equipment){
+            return $equipment->name;
+        });
+
+        return response()->json(['min_price' => $min_price, 'max_price' => $max_price, 'sizes' => $sizes, 'equipments' => $equipmentsNames]);
     }
 
     public function store(RoomRequest $request) // Создание номера
