@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReviewResource;
 use App\Models\Review;
 use App\Http\Requests\ReviewRequest;
 use App\Services\ReviewService;
@@ -22,12 +23,13 @@ class ReviewController extends Controller
     public function randomCountReviews()
     {
         $reviewsCount = Review::count();
-        if(5 > $reviewsCount){
+        if ($reviewsCount < 5) {
             return response()->json(['message' => 'Недостаточное кол-во существующих отзывов'], 400);
         }
-        $reviews = Review::inRandomOrder()->limit(5)->get();
+        
+        $reviews = Review::with('user')->inRandomOrder()->limit(5)->get();
 
-        return response()->json($reviews, 200);
+        return ReviewResource::collection($reviews);
     }
 
     public function store(ReviewRequest $request): JsonResponse
