@@ -4,12 +4,11 @@ import {storeToRefs} from "pinia";
 import {useRoomStore} from "@/stores/room.js";
 import {onMounted} from "vue";
 
-const { filters, initFilters, equipments, rooms } = storeToRefs(useRoomStore())
-const { getRoom, getFilters, getEquipment, resetFilter } = useRoomStore()
+const { filters, initFilters, rooms } = storeToRefs(useRoomStore())
+const { getRoom, getFilters, resetFilter } = useRoomStore()
 
 onMounted(() => {
   getFilters()
-  getEquipment()
 })
 
 </script>
@@ -48,9 +47,9 @@ onMounted(() => {
           <div class="filter-field">
             <h3 class="filter-field__title font-bold">Оснащение</h3>
             <div class="filter-equipment">
-              <div class="filter-equipment__items" v-for="equipment in equipments">
-                <input :id="`equipment-${equipment.name}`" type="checkbox" :value="equipment.name" v-model="filters.equipments_names">
-                <label :for="`equipment-${equipment.name}`">{{ equipment.name }}</label>
+              <div class="filter-equipment__items" v-for="equipment in initFilters.equipments">
+                <input :id="`equipment-${equipment}`" type="checkbox" :value="equipment" v-model="filters.equipments_names">
+                <label :for="`equipment-${equipment}`">{{ equipment }}</label>
               </div>
             </div>
           </div>
