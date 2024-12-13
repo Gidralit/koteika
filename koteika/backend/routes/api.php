@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipmentController;
 
 
-Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('/equipments', EquipmentController::class);
     Route::apiResource('/rooms', RoomController::class);
     Route::patch('/contacts', [ContactController::class, 'update']);
@@ -25,7 +25,6 @@ Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
     Route::get('/reservation/userReservations', [ReservationController::class, 'userReservations']);
 }); //Доступно авторизованным пользователям
 
-Route::prefix('booking')->group(function () {
     Route::get('/equipments', [EquipmentController::class, 'index']);
     Route::get('/contacts', [ContactController::class, 'index']);
     Route::get('/headers', [HeaderController::class, 'index']);
@@ -35,7 +34,7 @@ Route::prefix('booking')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::middleware('auth:api')->apiResource('/user', UserController::class);
-});//Доступно всем
+    //Доступно всем пользователям
 
 Route::prefix('api-reservation')->middleware(['auth:sanctum'])->group(function () {
 });

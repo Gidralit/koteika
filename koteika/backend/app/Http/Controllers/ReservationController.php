@@ -8,8 +8,6 @@ use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use Illuminate\Support\Facades\Gate;
-use function Pest\Laravel\json;
-
 
 class ReservationController extends Controller
 {
@@ -18,8 +16,6 @@ class ReservationController extends Controller
         if (!$room) {
             return response()->json(['message' => 'Комната не найдена'], 404);
         }
-
-
         $checkInDate = $request->input('check_in_date');
         $checkOutDate = $request->input('check_out_date');
 
@@ -35,7 +31,6 @@ class ReservationController extends Controller
                     });
             })
             ->get();
-
         if ($oldReservations->isNotEmpty()) {
             return response()->json(['message' => 'Бронь на это время уже существует'], 409);
         }
@@ -49,10 +44,8 @@ class ReservationController extends Controller
             'pets_count' => $request->pets_count ?? 0,
             'status' => 'pending',
         ]);
-
         return response()->json(['message' => 'Заявка на бронь успешно подана'], 201);
     }
-
     public function cancelReservation($reservationId)
     {
         $reservation = Reservation::find($reservationId);
@@ -65,7 +58,6 @@ class ReservationController extends Controller
         $reservation->delete();
         return response()->json(['message' => 'Бронирование успешно отменено'], 200);
     }
-
 
     public function userReservations()
     {
@@ -80,7 +72,6 @@ class ReservationController extends Controller
         return response()->json($reservations, 200, [], JSON_UNESCAPED_UNICODE);
 
     }
-
     public function index(Request $request)
     {
         Gate::authorize('admin', Reservation::class);
@@ -90,12 +81,10 @@ class ReservationController extends Controller
             $query->where('room_id', $request->input('room_id'));
         }
 
-        // Получаем все заявки на бронь
         $reservations = $query->with('room', 'user')->get();
 
         return response()->json($reservations, 200);
     }
-
     public function approveReservation($reservationId)
     {
         Gate::authorize('admin', Reservation::class);
@@ -108,7 +97,6 @@ class ReservationController extends Controller
         $reservation->save();
         return response()->json(['message' => 'Бронирование успешно одобрено'], 200);
     }
-
     public function adminDeleteReservation($reservationId)
     {
         Gate::authorize('admin', Reservation::class);
