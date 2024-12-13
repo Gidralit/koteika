@@ -17,6 +17,11 @@ class RoomController extends Controller
         $this->roomService = $roomService;
     }
 
+    public function randomRooms(Request $request){
+        $rooms = Room::inRandomOrder()->limit(3)->get();
+        return response()->json($rooms);
+    }
+
     public function index(Request $request)
     {
         $query = Room::with('equipment');
