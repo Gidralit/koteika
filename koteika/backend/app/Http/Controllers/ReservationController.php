@@ -8,7 +8,7 @@ use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Room;
 use Illuminate\Support\Facades\Gate;
-
+use function Pest\Laravel\json;
 class ReservationController extends Controller
 {
     public function reservationRoom(ReservationRequest $request, Room $room)
@@ -85,6 +85,7 @@ class ReservationController extends Controller
 
         return response()->json($reservations, 200);
     }
+
     public function approveReservation($reservationId)
     {
         Gate::authorize('admin', Reservation::class);
@@ -97,6 +98,7 @@ class ReservationController extends Controller
         $reservation->save();
         return response()->json(['message' => 'Бронирование успешно одобрено'], 200);
     }
+
     public function adminDeleteReservation($reservationId)
     {
         Gate::authorize('admin', Reservation::class);
