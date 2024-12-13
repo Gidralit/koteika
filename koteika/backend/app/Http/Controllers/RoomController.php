@@ -6,6 +6,7 @@ use App\Http\Requests\RoomRequest;
 use App\Http\Resources\RoomResource;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\Equipment;
 use App\Services\RoomService;
 use App\Models\Equipment;
 
@@ -17,12 +18,22 @@ class RoomController extends Controller
         $this->roomService = $roomService;
     }
 
+    public function randomRooms(Request $request){
+        $rooms = Room::inRandomOrder()->limit(3)->get();
+        return response()->json($rooms);
+    }
+
     public function index(Request $request)
     {
         $query = Room::with('equipment');
 
         $rooms = $this->roomService->applyFiltersAndSort($query, $request)->get();
 
+        return response()->json($rooms);
+    }
+
+    public function randomRooms(){
+        $rooms = Room::inRandomOrder()->limit(3)->get();
         return response()->json($rooms);
     }
 
