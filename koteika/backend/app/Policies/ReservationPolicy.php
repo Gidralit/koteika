@@ -6,7 +6,7 @@ use App\Models\User;
 
 class ReservationPolicy
 {
-    public function update(User $user)
+    public function admin(User $user)
     {
         return $user->role === 'admin';
     }
