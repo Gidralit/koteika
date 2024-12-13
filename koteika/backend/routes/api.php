@@ -29,7 +29,9 @@ Route::prefix('booking')->group(function () {
     Route::get('/headers', [HeaderController::class, 'index']);
     Route::get('/rooms', [RoomController::class, 'index']);
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
+    Route::get('/random-rooms', [RoomController::class, 'randomRooms']);
     Route::get('/reviews/random', [ReviewController::class, 'randomCountReviews']);
+    Route::get('/rooms/{room}/reviews', [ReviewController::class, 'ReviewsRoom']);
     Route::post('/review/create', [ReviewController::class, 'create']);
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);

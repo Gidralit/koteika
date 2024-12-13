@@ -16,7 +16,6 @@ class ReviewResource extends JsonResource
             'rating' => $this->rating,
             'user' => [
                 'name' => $this->user->name,
-                'email' => $this->user->email,
             ],
         ];
     }

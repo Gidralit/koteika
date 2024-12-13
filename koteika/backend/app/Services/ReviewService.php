@@ -26,12 +26,16 @@ class ReviewService
             throw new Exception('Вы уже оставили отзыв на это бронирование');
         }
 
-        return Review::create([
+        $review = Review::create([
             'user_id' => Auth::id(),
             'reservation_id' => $data['reservation_id'],
             'title' => $data['title'],
             'content' => $data['content'],
             'rating' => $data['rating'],
         ]);
+
+        $review->load('user');
+
+        return $review;
     }
 }
