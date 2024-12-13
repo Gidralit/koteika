@@ -11,9 +11,7 @@ class Room extends Model
 
     protected $fillable = [
         'name',
-        'width',
-        'height',
-        'length',
+        'square',
         'price',
         'show_on_homepage',
     ];

@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -23,7 +21,7 @@ class ReservationRequest extends FormRequest
             'pets_names' => [
                 'required',
                 'string',
-                'regex:/^[а-яА-ЯёЁa-zA-Zs-]+$/', // Валидация имени питомца
+                'regex:/^[а-яА-ЯёЁa-zA-Zs-]+$/',
                 function ($attribute, $value, $fail) {
 
                     $namesArray = array_filter(array_map('trim', explode(',', $value)));
@@ -75,7 +73,6 @@ class ReservationRequest extends FormRequest
         $checkInDate = Carbon::createFromFormat('Y-m-d', $checkIn);
         $checkOutDate = Carbon::createFromFormat('Y-m-d', $checkOut);
 
-        // Получаем все существующие брони для данного номера
         $existingReservation = DB::table('reservations')
             ->where('room_id', $this->room_id)
             ->where(function ($query) use ($checkInDate, $checkOutDate) {

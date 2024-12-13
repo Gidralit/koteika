@@ -5,6 +5,7 @@ use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 
 class RoomService
@@ -89,14 +90,15 @@ class RoomService
                 $filename = Str::random(10).'.'.$data[$key]->extension();
                 $data[$key]->storeAs('photosRooms', $filename, 'public');
                 $data[$key] = 'photosRooms/'.$filename;
-            }   
+            }
         }
 
+        $room = Room::create($data);
         if (isset($data['equipment'])) {
             $room->equipment()->attach($data['equipment']);
         }
 
-        return Room::create($data);
+        return $room;
     }
 
     public function updateRoom(Room $room, $data)

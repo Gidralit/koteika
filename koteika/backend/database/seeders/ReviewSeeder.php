@@ -8,9 +8,6 @@ use App\Models\Review;
 
 class ReviewSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
         Review::factory()->count(6)->create();

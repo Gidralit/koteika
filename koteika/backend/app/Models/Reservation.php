@@ -23,8 +23,8 @@ class Reservation extends Model
 
     public function approve()
     {
-        $this->status = 'approved'; // Устанавливаем статус как 'approved'
-        $this->save(); // Сохраняем изменения в базе данных
+        $this->status = 'approved';
+        $this->save();
     }
 
     public function user()

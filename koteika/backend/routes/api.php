@@ -21,6 +21,7 @@ Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
     Route::post('/reservation/{room}', [ReservationController::class, 'reservationRoom']);
     Route::delete('/reservation/{id}', [ReservationController::class, 'cancelReservation']);
     Route::post('/reservation/{id}/approve', [ReservationController::class, 'approveReservation']);
+    Route::post('/reviews', [ReviewController::class, 'store']);
 }); //Доступно авторизованным пользователям
 
 Route::prefix('booking')->group(function () {
