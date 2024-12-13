@@ -82,21 +82,24 @@ class RoomService
             return response()->json($rooms);
         }
     }
-    public function createRoom($data)
-    {
+    
+    public function createRoom(array $data)
+    {   
+        $room = Room::create($data);
         $photoKeys = ['photo_path1', 'photo_path2', 'photo_path3', 'photo_path4', 'photo_path5'];
         foreach($photoKeys as $key){
             if(isset($data[$key])){
                 $filename = Str::random(10).'.'.$data[$key]->extension();
                 $data[$key]->storeAs('photosRooms', $filename, 'public');
                 $data[$key] = 'photosRooms/'.$filename;
-            }
+            }   
         }
 
-        $room = Room::create($data);
         if (isset($data['equipment'])) {
             $room->equipment()->attach($data['equipment']);
         }
+
+        $room->update($data);
 
         return $room;
     }
