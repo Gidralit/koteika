@@ -5,6 +5,7 @@ use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 
 class RoomService
@@ -81,8 +82,10 @@ class RoomService
             return response()->json($rooms);
         }
     }
-    public function createRoom($data)
-    {
+
+    public function createRoom(array $data)
+    {   
+        $room = Room::create($data);
         $photoKeys = ['photo_path1', 'photo_path2', 'photo_path3', 'photo_path4', 'photo_path5'];
         foreach($photoKeys as $key){
             if(isset($data[$key])){
@@ -96,7 +99,9 @@ class RoomService
             $room->equipment()->attach($data['equipment']);
         }
 
-        return Room::create($data);
+        $room->update($data);
+
+        return $room;
     }
 
     public function updateRoom(Room $room, $data)

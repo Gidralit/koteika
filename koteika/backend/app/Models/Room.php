@@ -11,9 +11,7 @@ class Room extends Model
 
     protected $fillable = [
         'name',
-        'width',
-        'height',
-        'length',
+        'square',
         'price',
         'show_on_homepage',
     ];
@@ -23,7 +21,13 @@ class Room extends Model
         'updated_at'
     ];
 
-    public function equipment(){
+    public function equipment()
+    {
         return $this->belongsToMany(Equipment::class, 'equipment_room');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }

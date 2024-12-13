@@ -10,10 +10,6 @@ use Illuminate\Routing\Controller;
 
 class EquipmentController extends Controller
 {
-    public function index(): JsonResponse
-    {
-        return response()->json(Equipment::all());
-    }
 
     protected $equipmentService;
 

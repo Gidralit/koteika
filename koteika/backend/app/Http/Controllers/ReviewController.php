@@ -3,9 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Http\Requests\ReviewRequest;
+use App\Services\ReviewService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+
+
 
 class ReviewController extends Controller
 {
+
+    protected $reviewService;
+    public function __construct(ReviewService $reviewService)
+    {
+        $this->reviewService = $reviewService;
+    }
+
     public function randomCountReviews()
     {
         $reviewsCount = Review::count();
@@ -17,7 +30,14 @@ class ReviewController extends Controller
         return response()->json($reviews, 200);
     }
 
-    public function create(Request $request){
-        
+    public function store(ReviewRequest $request): JsonResponse
+    {
+        try {
+            $review = $this->reviewService->createReview($request->validated());
+
+            return response()->json(['message' => 'Отзыв успешно создан', 'review' => $review], 201);
+        } catch (Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 403);
+        }
     }
 }

@@ -19,4 +19,7 @@ class RoomSeeder extends Seeder
                 $room->equipment()->attach($equipmentIds);
             });
     }
+
+
+
 }
