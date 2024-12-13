@@ -9,10 +9,18 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-    'avatar',
-    'email', 
-    'title', 
-    'content', 
-    'rating'];
+    protected $fillable = ['user_id', 'reservation_id', 'title', 'content', 'rating'];
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function reservation()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
 }

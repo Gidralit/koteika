@@ -19,9 +19,9 @@ const logoutFunc = () => {
   <nav class="navigation">
     <div class="navigation-inner">
       <router-link to="/" class="navigation-link">Главная</router-link>
-      <router-link to="/catalog" class="navigation-link">Номера</router-link>
-      <a href="#" class="navigation-link">Отзывы</a>
-      <a href="#" class="navigation-link">О нас</a>
+      <router-link to="/room" class="navigation-link">Номера</router-link>
+      <router-link to="/#reviews" class="navigation-link">Отзывы</router-link>
+      <router-link to="/#abous-us" class="navigation-link">О нас</router-link>
     </div>
     <template v-if="!isAuth">
       <div class="register">
@@ -31,7 +31,7 @@ const logoutFunc = () => {
     </template>
     <template v-else>
       <div class="register">
-        <router-link to="#" class="navigation-link">Личный профиль</router-link>
+        <router-link to="/profile" class="navigation-link">Личный профиль</router-link>
         <a href="#" class="navigation-link" @click="logoutFunc">Выйти из аккаунта</a>
       </div>
     </template>

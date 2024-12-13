@@ -1,6 +1,4 @@
 <script setup>
-import { useReviewStore } from "@/stores/review.js";
-import { storeToRefs } from "pinia";
 import defaultAvatar from "@/assets/img/default-avatar.jpg"
 import { StarIcon } from "@/components/icons";
 

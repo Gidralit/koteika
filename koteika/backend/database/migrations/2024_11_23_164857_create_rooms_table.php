@@ -11,11 +11,13 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->float('width');
-            $table->float('height');
-            $table->float('length');
+            $table->integer('square');
             $table->integer('price');
-            $table->string('photo_path')->nullable();
+            $table->string('photo_path1')->nullable();
+            $table->string('photo_path2')->nullable();
+            $table->string('photo_path3')->nullable();
+            $table->string('photo_path4')->nullable();
+            $table->string('photo_path5')->nullable();
             $table->boolean('show_on_homepage')->default(false);
             $table->timestamps();
         });

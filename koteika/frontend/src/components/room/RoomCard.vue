@@ -1,27 +1,58 @@
 <script setup>
 import {LawIcon} from "@/components/icons/index.js";
+import defaultPhoto from '@/assets/img/default-img.jpg'
+import {storeToRefs} from "pinia";
+import {useAuthStore} from "@/stores/auth.js";
+const { isAuth } = storeToRefs(useAuthStore())
+
+const props = defineProps({
+  id: {
+    type: Number,
+    default: null
+  },
+  name: {
+    type: String,
+    default: ''
+  },
+  square: {
+    type: Number,
+    default: null
+  },
+  photo_path1: {
+    type: String,
+    default: ''
+  },
+  status: {
+    type: String,
+    default: ''
+  },
+  price: {
+    type: Number,
+    default: null
+  },
+  equipment: {
+    type: Array,
+    default: () => []
+  }
+})
 </script>
 
 <template>
 <article class="room-card">
   <div class="room-card__Image">
-    <div class="room-card__image">
-      <div class="room-card__overlay">
+    <div class="room-card__image" :style="{ background: `url(${ 'http://localhost/storage/' + photo_path1 || defaultPhoto }) no-repeat`, backgroundSize: 'cover'}">
+      <div class="room-card__overlay" v-for="equip in equipment">
         <LawIcon></LawIcon>
-        <p>Игрушки</p>
-      </div>
-      <div class="room-card__overlay">
-        <LawIcon></LawIcon>
-        <p>Когтеточка</p>
+        <p>{{ equip.name }}</p>
       </div>
     </div>
   </div>
-  <h3 class="room-card__title">Кошачий рай</h3>
+  <h3 class="room-card__title">{{ name }}</h3>
   <div class="room-card__bottom">
-    <p>20 кв.м</p>
+    <p>{{ square }} кв.м</p>
     <div class="room-card__price">
-      <p>1000р</p>
-      <button class="room-card__btn font-bold">Забронировать</button>
+      <p>{{ price }}р.</p>
+      <button class="room-card__btn font-bold" v-if="isAuth">Забронировать</button>
     </div>
   </div>
 </article>
@@ -37,15 +68,14 @@ import {LawIcon} from "@/components/icons/index.js";
     box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.15);
     background: #fff;
     border-radius: 10px;
+    align-self: flex-start;
 
     &__title{
-      font-size: 28px;
+      font-size: 24px;
     }
 
     &__image {
       display: flex;
-      background: url("@/assets/img/RoomCard.png") no-repeat;
-      background-size: cover;
       min-height: 310px;
       width: 100%;
       border-radius: 10px 10px 0 0;
@@ -93,7 +123,6 @@ import {LawIcon} from "@/components/icons/index.js";
       background: var(--main-accent);
       color: var(--main-black);
       border: none;
-      cursor: pointer;
     }
 
   }

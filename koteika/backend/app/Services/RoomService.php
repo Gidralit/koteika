@@ -5,6 +5,7 @@ use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 
 class RoomService
@@ -42,18 +43,12 @@ class RoomService
     protected function applyDimensionsFilter(Builder $query, $request){
         if(!is_null($request->input('dimensions'))){
             $dimensions = $request->input('dimensions');
-            $arrayNumbers = explode(',', $dimensions);
-            $arrayDimensions = [];
-
-            for($i = 0; $i<count($arrayNumbers); $i += 3){
-                $arrayDimensions[] = trim($arrayNumbers[$i]).','.trim($arrayNumbers[$i+1]).','.trim($arrayNumbers[$i+2]);
-            }
+            $arrayDimensions = explode(',', $dimensions);
 
             if (!empty($arrayDimensions)) {
-                // Используем orWhere, чтобы охватить любые подходящие размеры
                 $query->where(function ($q) use ($arrayDimensions) {
                     foreach ($arrayDimensions as $dimension) {
-                        $q->orWhere('dimensions', '=', $dimension);
+                        $q->orWhere('square', '=', $dimension);
                     }
                 });
             }
@@ -87,20 +82,24 @@ class RoomService
             return response()->json($rooms);
         }
     }
-    public function createRoom($data)
-    {
+
+    public function createRoom(array $data)
+    {   
         $room = Room::create($data);
-
-        if (isset($data['photos'])) {
-            foreach ($data['photos'] as $photo) {
-                $path = $photo->store('photos', 'public');
-
-            }
+        $photoKeys = ['photo_path1', 'photo_path2', 'photo_path3', 'photo_path4', 'photo_path5'];
+        foreach($photoKeys as $key){
+            if(isset($data[$key])){
+                $filename = Str::random(10).'.'.$data[$key]->extension();
+                $data[$key]->storeAs('photosRooms', $filename, 'public');
+                $data[$key] = 'photosRooms/'.$filename;
+            }   
         }
 
         if (isset($data['equipment'])) {
             $room->equipment()->attach($data['equipment']);
         }
+
+        $room->update($data);
 
         return $room;
     }

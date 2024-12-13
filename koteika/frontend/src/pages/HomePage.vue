@@ -17,7 +17,7 @@ import { AboutUs } from "@/components/index.js";
     </div>
   </section>
   <AboutUs />
-  <section class="reviews">
+  <section class="reviews" id="reviews">
     <div class="container">
       <h2 class="reviews-title font-bold">Отзывы</h2>
       <ReviewList />
@@ -32,11 +32,13 @@ import { AboutUs } from "@/components/index.js";
 <style scoped lang="scss">
 .rooms{
   margin-bottom: 80px;
+
   &-title{
     font-size: 36px;
     margin-bottom: 40px;
   }
 }
+
 .reviews{
   &-title{
     font-size: 36px;
