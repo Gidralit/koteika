@@ -18,7 +18,7 @@ const props = defineProps({
     type: Number,
     default: null
   },
-  photo_path: {
+  photo_path1: {
     type: String,
     default: ''
   },
@@ -40,7 +40,7 @@ const props = defineProps({
 <template>
 <article class="room-card">
   <div class="room-card__Image">
-    <div class="room-card__image" :style="{ background: `url(${ photo_path || defaultPhoto }) no-repeat`, backgroundSize: 'cover'}">
+    <div class="room-card__image" :style="{ background: `url(${ 'http://localhost/storage/' + photo_path1 || defaultPhoto }) no-repeat`, backgroundSize: 'cover'}">
       <div class="room-card__overlay" v-for="equip in equipment">
         <LawIcon></LawIcon>
         <p>{{ equip.name }}</p>

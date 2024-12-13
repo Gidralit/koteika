@@ -12,7 +12,7 @@ export const useRoomStore = defineStore('room', () => {
         dimensions: null
     })
     const initFilters = ref({})
-    const equipments = ref([])
+    const oneRoom = ref({})
 
     const getRoom = async () => {
         const response = await RoomApi.getRooms({
@@ -31,9 +31,9 @@ export const useRoomStore = defineStore('room', () => {
         initFilters.value = response.data
     }
 
-    const getEquipment = async () => {
-        const response = await RoomApi.getEquipments()
-        equipments.value = response.data
+    const getOneRoom = async () => {
+        const response = await RoomApi.getOneRoom()
+        oneRoom.value = response.data
     }
 
     const resetFilter = () => {
@@ -49,10 +49,10 @@ export const useRoomStore = defineStore('room', () => {
         rooms,
         filters,
         initFilters,
-        equipments,
+        oneRoom,
         getRoom,
         getFilters,
-        getEquipment,
-        resetFilter
+        resetFilter,
+        getOneRoom
     }
 })
