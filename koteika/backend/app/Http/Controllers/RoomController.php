@@ -31,6 +31,11 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
+    public function randomRooms(){
+        $rooms = Room::inRandomOrder()->limit(3)->get();
+        return response()->json($rooms);
+    }
+
     public function dataForFilters(){
         $rooms = Room::all();
         $min_price = $rooms->min('price');
