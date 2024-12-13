@@ -23,8 +23,8 @@ class Reservation extends Model
 
     public function approve()
     {
-        $this->status = 'approved'; // Устанавливаем статус как 'approved'
-        $this->save(); // Сохраняем изменения в базе данных
+        $this->status = 'approved';
+        $this->save();
     }
 
     public function user()
@@ -36,4 +36,13 @@ class Reservation extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    protected $casts = [
+        'pets_names' => 'array',
+    ];
+    public function getPetsNamesAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
 }

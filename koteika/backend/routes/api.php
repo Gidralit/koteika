@@ -19,8 +19,10 @@ Route::prefix('booking')->middleware(['auth:sanctum'])->group(function () {
     Route::patch('/rooms/{room}/status', [RoomController::class, 'updateShowOnHomepage']);
     Route::get('/reservation', [ReservationController::class, 'index']);
     Route::post('/reservation/{room}', [ReservationController::class, 'reservationRoom']);
-    Route::delete('/reservation/{id}', [ReservationController::class, 'cancelReservation']);
+    Route::delete('/cancelReservation/{id}', [ReservationController::class, 'cancelReservation']);
+    Route::delete('/deleteReservation/{id}', [ReservationController::class, 'adminDeleteReservation']);
     Route::post('/reservation/{id}/approve', [ReservationController::class, 'approveReservation']);
+    Route::get('/reservation/userReservations', [ReservationController::class, 'userReservations']);
 }); //Доступно авторизованным пользователям
 
 Route::prefix('booking')->group(function () {
