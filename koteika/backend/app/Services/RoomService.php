@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
@@ -84,7 +85,7 @@ class RoomService
     }
 
     public function createRoom(array $data)
-    {   
+    {
         $room = Room::create($data);
         $photoKeys = ['photo_path1', 'photo_path2', 'photo_path3', 'photo_path4', 'photo_path5'];
         foreach($photoKeys as $key){
@@ -92,16 +93,15 @@ class RoomService
                 $filename = Str::random(10).'.'.$data[$key]->extension();
                 $data[$key]->storeAs('photosRooms', $filename, 'public');
                 $data[$key] = 'photosRooms/'.$filename;
-            }   
+            }
         }
 
         if (isset($data['equipment'])) {
             $room->equipment()->attach($data['equipment']);
         }
 
-        $room->update($data);
-
-        return $room;
+        $room->load('equipment');
+        return new RoomResource($room);
     }
 
     public function updateRoom(Room $room, $data)
@@ -112,7 +112,8 @@ class RoomService
             $room->equipment()->sync($data['equipment']);
         }
 
-        return $room;
+        $room->load('equipment');
+        return new RoomResource($room);
     }
 
     public function deleteRoom(Room $room)
