@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Room;
 use App\Models\Equipment;
 use App\Services\RoomService;
-use App\Models\Equipment;
 
 class RoomController extends Controller
 {
