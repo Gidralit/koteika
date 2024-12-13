@@ -10,6 +10,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipmentController;
 
+Route::get('/rooms/random', [RoomController::class, 'randomRooms']);
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::get('/headers', [HeaderController::class, 'index']);
 
@@ -17,7 +18,6 @@ Route::get('/reviews/random', [ReviewController::class, 'randomCountReviews']);
 
 Route::get('/rooms', [RoomController::class, 'index']);
 Route::get('/rooms/{room}', [RoomController::class, 'show']);
-Route::get('/rooms/random', [RoomController::class, 'randomRooms']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

@@ -1,0 +1,1125 @@
+{
+	"info": {
+		"_postman_id": "1ca279d8-d2e8-4db4-aab9-61eaa017b791",
+		"name": "koteikaFinale",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38826388"
+	},
+	"item": [
+		{
+			"name": "Юзер",
+			"item": [
+				{
+					"name": "Просмотр одного профиля",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}user",
+						"description": "Просмотр профиля, возвращает инфу о юзере  \nДля просмотра нужна авторизация по Bearer Token"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование профиля",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 2|u1noPXjAFiahoW0RopxuS6nnhQ1OvP0fPNSRAImQ0cbc38ab",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Крутой админчик\",\r\n    \"phone\": \"+7(111)111-11-13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}user/edit",
+						"description": "Редактирование профиля, для использования нужно авторизоваться по Bearer Token"
+					},
+					"response": []
+				},
+				{
+					"name": "Логин юзер",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"user@user.com\",\r\n    \"password\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}login",
+						"description": "Логин юзера, возвращает Bearer Token  \nИспользуется скрипт, который вставляет токен юзера в каждый запрос, где нужно указать токен. Если вас нужен фукнционал администратора, залогиньтесь под ним"
+					},
+					"response": []
+				},
+				{
+					"name": "Логин админ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@admin.com\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}login",
+						"description": "Логин админа, возвращает Bearer Token  \nТакже вставляет токен админа в авторизации при запросах"
+					},
+					"response": []
+				},
+				{
+					"name": "registration",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Алексей\",\n    \"phone\": \"+7(225)123-23-23\",\n    \"email\": \"testemail22223@example.com\",\n    \"password\": \"12345678\",\n    \"password_confirmation\": \"12345678\",\n    \"avatar\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}register",
+							"host": [
+								"{{host}}register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "Регистрация, возвращает введеные данные"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Шапка",
+			"item": [
+				{
+					"name": "Показать шапку",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}headers",
+						"description": "Получаем инфу о шапке  \nДоступно всем"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование шапки",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Собакен\",\r\n    \"text\": \"Текст\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}headers/update",
+						"description": "Редактируем шапку, можем изменить только несколько строк, для этого убираем их из запроса. Если строку не убрать, а запрос оставить пустой - будет ошибка валидации  \nНужны права админа"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Контакты",
+			"item": [
+				{
+					"name": "Показать контакты",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}contacts",
+						"description": "Получаем значения из БД контакты"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать контакты",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\":\"Ленина 1\",\r\n    \"works_with\":\"09:00\",\r\n    \"works_until\":\"23:00\",\r\n    \"telephone\":\"+88888888\",\r\n    \"email\":\"booking@mail.ru\",\r\n    \"link_to_vk\":\"vk\",\r\n    \"link_to_whatsapp\":\"whatsapp\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}contacts",
+						"description": "Редактирование значений из БД контакты.  \nМы можем в body убрать полностью строку, которую не хотим изменять, в этом случае запрос успешно пройдет. Но если строку оставить и ничего не передать - будет ошибка валидации, что она не заполнена."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Оснащения",
+			"item": [
+				{
+					"name": "Показать все оснащения",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}equipments",
+						"description": "Получить все существующие оснащения\n\nЗащищено санктумом, так как используется только при создании комнаты"
+					},
+					"response": []
+				},
+				{
+					"name": "Создать оснащение",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"душ\"\r\n}    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}equipments",
+						"description": "Создаем запись с оснащением в БД (можно без иконки)\n\nНужны права администратора."
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование оснащения",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"микроволновка\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}equipments/10",
+						"description": "Изменяем название оснащения или иконки  \nНужны права администоратора"
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить оснащение",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}equipments/11",
+						"description": "Удаляем оснащение по айдишнику  \nНужны права администратора"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Управление номерами",
+			"item": [
+				{
+					"name": "Просмотр всех номеров",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}rooms",
+						"description": "Получение всех существующих комнат  \nДоступно всем"
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотр одного номера",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": "{{host}}rooms/2",
+						"description": "Просмотр конкретного номера, доступно всем"
+					},
+					"response": []
+				},
+				{
+					"name": "Создание номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Комната\",\r\n    \"square\": 65,\r\n    \"price\": 1500,\r\n    \"show_on_homepage\": true,\r\n    \"equipment\": [13, 14, 15],  \r\n    \"photos\": \"\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}rooms",
+						"description": "Создание номера, при создании создаются записи в промежуточной таблице, какие номера какие оснащения имеют."
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Комната\",\r\n    \"width\": 5.0,\r\n    \"height\": 3.0,\r\n    \"price\": 124,\r\n    \"photos\": \"\",\r\n    \"equipment\": [1, 10, 3]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}rooms/1",
+						"description": "редактиврование номера, доступно только администратру  \n  \nМожем не передавать некоторые строки для изменений, для этого просто убираем ее из запроса. Если оставить значение пустым - будет ошибка валидации"
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}rooms/3",
+						"description": "Удаление номера, доступно админу"
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить статус номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"show_on_homepage\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}rooms/2/status",
+						"description": "Изменение статуса номера (показ на главной странице)  \nНужны права админа  \nВ запрос передаем false (не отображать) или true (отображать)"
+					},
+					"response": []
+				},
+				{
+					"name": "random rooms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}rooms/random"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Фильтрация номеров",
+			"item": [
+				{
+					"name": "get rooms with order by desc",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}rooms?order_by=desc",
+							"host": [
+								"{{host}}rooms"
+							],
+							"query": [
+								{
+									"key": "order_by",
+									"value": "desc"
+								}
+							]
+						},
+						"description": "Получение номеров от большей к меньшей стоимости\n\nдоступно всем"
+					},
+					"response": []
+				},
+				{
+					"name": "get rooms with filter max or min price",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}rooms?min_price=171&max_price=687",
+							"host": [
+								"{{host}}rooms"
+							],
+							"query": [
+								{
+									"key": "min_price",
+									"value": "171"
+								},
+								{
+									"key": "max_price",
+									"value": "687"
+								}
+							]
+						},
+						"description": "Сортировка по диапозону цен на номер"
+					},
+					"response": []
+				},
+				{
+					"name": "get rooms with filter dimensions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}rooms?dimensions=100,18",
+							"host": [
+								"{{host}}rooms"
+							],
+							"query": [
+								{
+									"key": "dimensions",
+									"value": "100,18"
+								}
+							]
+						},
+						"description": "Сортировка по площади"
+					},
+					"response": []
+				},
+				{
+					"name": "get rooms with filter equipments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}rooms?equipments_names=душ",
+							"host": [
+								"{{host}}rooms"
+							],
+							"query": [
+								{
+									"key": "equipments_names",
+									"value": "душ"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные для фильтров",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{host}}filters_data"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Отзывы",
+			"item": [
+				{
+					"name": "Get 5 random reviews",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}reviews/random",
+						"description": "получить 5 случайных отзывов"
+					},
+					"response": []
+				},
+				{
+					"name": "Создание отзыва",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"reservation_id\": 1,\r\n    \"title\": \"Отличное место!\",\r\n    \"content\": \"Мне очень понравилось, буду рекомендовать друзьям.\",\r\n    \"rating\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{host}}reviews",
+						"description": "Создание отзыв, отзыв может только оставить пользователь, у которого есть связь с бронью.  \nЕсли связи нет, отзыв оставить не получится, также если бронирование не было одобрено администратором, отзыв также оставить не получится.  \nДва раза на одно и тоже бронирование отзыв оставить нельзя.\n\nДля проверки залогиньтесь под адином, чтобы не переключать токены туда сюда  \nДальше создайте бронь, она будет = id 17 (после создании брони ваш id админа свяжется с id бронирования.  \nДальше одобрите эту бронь  \nДальше в запросе при создании отзыва укажите reservation_id: 17"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Бронирование",
+			"item": [
+				{
+					"name": "Создание брони",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"pets_count\": 3,\r\n    \"pets_names\": [\"Bobik\", \"Jon n-y\", \"Шарик\"],\r\n    \"room_id\": \"1\",\r\n    \"check_in_date\": \"2024-12-15\",\r\n    \"check_out_date\": \"2024-12-22\",\r\n    \"price\": \"1\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}reservation/:room_id",
+							"host": [
+								"{{host}}reservation"
+							],
+							"path": [
+								":room_id"
+							],
+							"variable": [
+								{
+									"key": "room_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Одобрение брони",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}reservation/:reservation_id/approve",
+							"host": [
+								"{{host}}reservation"
+							],
+							"path": [
+								":reservation_id",
+								"approve"
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление брони",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}cancelReservation/:reservation_id",
+							"host": [
+								"{{host}}cancelReservation"
+							],
+							"path": [
+								":reservation_id"
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление брони админом",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}deleteReservation/:reservation_id",
+							"host": [
+								"{{host}}deleteReservation"
+							],
+							"path": [
+								":reservation_id"
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получение списка брони",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}reservation"
+					},
+					"response": []
+				},
+				{
+					"name": "Вывод брони пользователя",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": "{{host}}reservation/userReservations"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost/api/",
+			"type": "string"
+		}
+	]
+}
