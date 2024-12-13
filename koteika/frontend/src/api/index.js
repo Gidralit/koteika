@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const $api = axios.create({baseURL: 'http://localhost/api/booking', headers: { Accept: 'application/json' }})
+export const $api = axios.create({baseURL: 'http://localhost/api', headers: { Accept: 'application/json' }})
 export * as HeaderApi from './headers'
 export * as RoomApi from './rooms'
 export * as ContactApi from './contacts'

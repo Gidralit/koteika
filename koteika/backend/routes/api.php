@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipmentController;
 
 Route::get('/rooms/random', [RoomController::class, 'randomRooms']);
+
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::get('/headers', [HeaderController::class, 'index']);
 
