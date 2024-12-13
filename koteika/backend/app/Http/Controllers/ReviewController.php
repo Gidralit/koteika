@@ -26,7 +26,7 @@ class ReviewController extends Controller
         if ($reviewsCount < 5) {
             return response()->json(['message' => 'Недостаточное кол-во существующих отзывов'], 400);
         }
-        
+
         $reviews = Review::with('user')->inRandomOrder()->limit(5)->get();
 
         return ReviewResource::collection($reviews);
