@@ -6,6 +6,7 @@ use App\Http\Requests\RoomRequest;
 use App\Http\Resources\RoomResource;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use App\Models\Equipment;
 use App\Services\RoomService;
 
 class RoomController extends Controller
