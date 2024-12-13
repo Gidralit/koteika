@@ -26,6 +26,7 @@ class ReviewController extends Controller
             return response()->json(['message' => 'Недостаточное кол-во существующих отзывов'], 400);
         }
         $reviews = Review::inRandomOrder()->limit(5)->get();
+        
 
         return response()->json($reviews, 200);
     }
